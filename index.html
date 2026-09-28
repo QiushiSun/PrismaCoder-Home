@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PrismaCoder: Pushing the Boundaries of Open Multimodal Code Intelligence through Decomposed Rubric Synthesis</title>
+  <!-- TODO: a one-sentence page description here and in og:/twitter:description. -->
+  <meta name="description"
+    content="PrismaCoder: Pushing the Boundaries of Open Multimodal Code Intelligence through Decomposed Rubric Synthesis">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#02091a">
+
+  <link rel="icon" href="public/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="public/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16.png">
+  <link rel="apple-touch-icon" href="public/apple-touch-icon.png">
+
+  <!-- Open Graph / Twitter.
+       NOTE: absolute URLs are required by social scrapers. The page is served at
+       https://qiushisun.github.io/PrismaCoder-Home/; update every absolute URL
+       together if the host changes.
+       TODO: add a 1200x630 card at public/social/og-image.png, then add og:image /
+       twitter:image and switch twitter:card to summary_large_image. -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://qiushisun.github.io/PrismaCoder-Home/">
+  <meta property="og:site_name" content="PrismaCoder">
+  <meta property="og:title" content="PrismaCoder: Pushing the Boundaries of Open Multimodal Code Intelligence through Decomposed Rubric Synthesis">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@qiushi_sun">
+  <meta name="twitter:title" content="PrismaCoder: Pushing the Boundaries of Open Multimodal Code Intelligence through Decomposed Rubric Synthesis">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="static/css/main.css">
+  <!-- Reveal-on-scroll hides content until JS un-hides it, so only opt in when
+       JS is running; and the theme must be set before first paint. Both happen
+       here, before the body renders. -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.className += " js";
+      var t;
+      try { t = localStorage.getItem("prismacoder-theme"); } catch (e) { /* private mode */ }
+      if (t !== "light" && t !== "dark") {
+        t = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      }
+      d.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="cosmos" aria-hidden="true"></div>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+
+  <!-- ==================================================================== -->
+  <!-- Navigation                                                            -->
+  <!-- ==================================================================== -->
+  <nav class="nav" id="nav">
+    <div class="wrap">
+      <a class="nav-brand" href="#top">
+        <img src="public/favicon-512.png" alt="">
+        <span>PrismaCoder</span>
+      </a>
+      <button class="icon-btn nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menu">
+        <svg aria-hidden="true" width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+          <path d="M2 4h12M2 8h12M2 12h12" stroke-linecap="round" />
+        </svg>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <!-- TODO: settle the sibling-project list for this page. -->
+        <li class="nav-more" id="navMore" data-open="false">
+          <button type="button" aria-expanded="false" aria-haspopup="true">
+            More research
+            <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M1.5 3.5 5 7l3.5-3.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+          <ul>
+            <li><a href="https://qiushisun.github.io/OS-Sentinel-Home/" target="_blank" rel="noopener">
+              <img src="public/logos/projects/os-sentinel.png" alt="">
+              <span>OS-Sentinel <small>Mobile GUI Safety</small></span></a></li>
+            <li><a href="https://qiushisun.github.io/ScienceBoard-Home/" target="_blank" rel="noopener">
+              <img src="public/logos/projects/scienceboard.png" alt="">
+              <span>ScienceBoard <small>CUA for Science</small></span></a></li>
+            <li><a href="https://qiushisun.github.io/OS-Genesis-Home/" target="_blank" rel="noopener">
+              <img src="public/logos/projects/os-genesis.png" alt="">
+              <span>OS-Genesis <small>Annotation-Free Trajectory Synthesis</small></span></a></li>
+            <li><a href="https://osatlas.github.io/" target="_blank" rel="noopener">
+              <img src="public/logos/projects/os-atlas.png" alt="">
+              <span>OS-Atlas <small>GUI Action Foundation Model</small></span></a></li>
+            <li><a href="https://njucckevin.github.io/openmobile/" target="_blank" rel="noopener">
+              <img src="public/logos/projects/openmobile.png" alt="">
+              <span>OpenMobile <small>Open Mobile Agents</small></span></a></li>
+            <li><a href="https://aclanthology.org/2024.acl-long.505" target="_blank" rel="noopener">
+              <img src="public/logos/projects/seeclick.png" alt="">
+              <span>SeeClick <small>GUI Grounding</small></span></a></li>
+          </ul>
+        </li>
+        <!-- Section links double as the scroll-spy list (main.js reads them). -->
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#method">Method</a></li>
+        <li><a href="#dataset">Dataset</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#analysis">Analysis</a></li>
+        <li><a href="#examples">Examples</a></li>
+        <li><a href="#resources">Resources</a></li>
+      </ul>
+      <div class="nav-tools">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch to light theme">
+          <svg class="i-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"
+            aria-hidden="true">
+            <path d="M14 9.3A6 6 0 0 1 6.7 2a6.2 6.2 0 1 0 7.3 7.3Z" stroke-linejoin="round" />
+          </svg>
+          <svg class="i-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"
+            aria-hidden="true">
+            <circle cx="8" cy="8" r="3.1" />
+            <path d="M8 1v1.7M8 13.3V15M1 8h1.7M13.3 8H15M3 3l1.2 1.2M11.8 11.8 13 13M13 3l-1.2 1.2M4.2 11.8 3 13"
+              stroke-linecap="round" />
+          </svg>
+        </button>
+        <!-- TODO: GitHub button once the code repository is public.
+        <a class="icon-btn" href="https://github.com/…" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="…GitHub mark, see the Code button below…" /></svg>
+        </a> -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================================================================== -->
+  <!-- Hero — split layout: content left, key art right                      -->
+  <!-- ==================================================================== -->
+  <header class="hero" id="top">
+    <div class="wrap wrap-wide hero-split">
+      <div class="hero-content">
+        <h1><span class="gilt">PrismaCoder</span></h1>
+        <p class="tagline">Pushing the Boundaries of Open Multimodal Code Intelligence<br class="br-lg">
+          through Decomposed Rubric Synthesis</p>
+
+        <!-- TODO: lede (motivation, two or three sentences).
+        <p class="lede">…</p> -->
+
+        <!-- TODO: contribution bullets, one per artifact; bold only the lead phrase.
+        <ul class="bullets">
+          <li>
+            <span class="b-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">…</svg></span>
+            <span><b>Lead phrase</b> rest of the bullet</span>
+          </li>
+        </ul> -->
+
+        <!-- Release links. Each is parked (class "pending", no href) until its
+             artifact is public: then drop "pending" and add the href. -->
+        <div class="links">
+          <a class="btn btn-gold pending" data-link="paper">
+            <!-- arXiv logomark -->
+            <svg viewBox="0 0 17.732 24.269" aria-hidden="true">
+              <g transform="translate(-566.984 -271.548)">
+                <path d="M573.549,280.916l2.266,2.738,6.674-7.84c.353-.47.52-.717.353-1.117a1.218,1.218,0,0,0-1.061-.748h0a.953.953,0,0,0-.712.262Z" fill="currentColor"/>
+                <path d="M579.525,282.225l-10.606-10.174a1.413,1.413,0,0,0-.834-.5,1.09,1.09,0,0,0-1.027.66c-.167.4-.047.681.319,1.206l8.44,10.242h0l-6.282,7.716a1.336,1.336,0,0,0-.323,1.3,1.114,1.114,0,0,0,1.04.69A.992.992,0,0,0,571,293l8.519-7.92A1.924,1.924,0,0,0,579.525,282.225Z" fill="#b31b1b"/>
+                <path d="M584.32,293.912l-8.525-10.275,0,0L573.53,280.9l-1.389,1.254a2.063,2.063,0,0,0,0,2.965l10.812,10.419a.925.925,0,0,0,.742.282,1.039,1.039,0,0,0,.953-.667A1.261,1.261,0,0,0,584.32,293.912Z" fill="currentColor"/>
+              </g>
+            </svg>
+            Paper
+          </a>
+          <a class="btn pending" data-link="code">
+            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+            </svg>
+            Code
+          </a>
+          <a class="btn pending" data-link="dataset">
+            <span class="ic" aria-hidden="true">🤗</span>
+            Dataset
+          </a>
+          <a class="btn pending" data-link="models">
+            <span class="ic" aria-hidden="true">🤗</span>
+            Models
+          </a>
+        </div>
+      </div>
+
+      <figure class="hero-art hero-logo">
+        <picture>
+          <source srcset="public/logo.webp" type="image/webp">
+          <img src="public/logo.png" width="1051" height="912" fetchpriority="high" alt="PrismaCoder logo: a glass prism.">
+        </picture>
+      </figure>
+    </div>
+  </header>
+
+  <!-- ==================================================================== -->
+  <!-- Byline                                                                -->
+  <!-- ==================================================================== -->
+  <section class="byline">
+    <div class="wrap wrap-wide">
+      <div class="panel">
+        <!-- TODO: authors and affiliations. "au eq" colors an equal-contribution
+             author; each crest is a 96x96 transparent PNG pair (light / dark) in
+             public/affil/.
+        <p class="authors">
+          <span class="au eq"><a href="…" target="_blank" rel="noopener">First Author</a><sup>1,†</sup></span>,
+          <span class="au">Second Author<sup>2,✉</sup></span>
+        </p>
+        <ul class="affils">
+          <li><span class="mark"><img class="lt" src="public/affil/….png" alt=""><img class="dk" src="public/affil/…-dark.png" alt=""></span><span class="nm"><sup>1</sup>Institution</span></li>
+        </ul>
+        <p class="legend"><span class="eq-key">Equal contribution</span> &nbsp;
+          <sup>†</sup>Project lead &nbsp; <sup>✉</sup>Corresponding author</p> -->
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+
+    <!-- ================================================================== -->
+    <!-- News                                                                -->
+    <!-- ================================================================== -->
+    <section class="band-tight" id="news">
+      <div class="wrap">
+        <div class="card news rise">
+          <span class="eyebrow">News</span>
+          <ul>
+            <!-- Newest first; month granularity unless a day matters.
+            <li><time datetime="2026-10">2026-10</time>…</li> -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- Overview                                                            -->
+    <!-- Each section below is an empty slot: an eyebrow, a commented title  -->
+    <!-- and dashed placeholder blocks. Replace a block and drop its "slot"   -->
+    <!-- class when the content lands.                                       -->
+    <!-- ================================================================== -->
+    <section class="band-tight" id="overview">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Overview</span>
+          <!-- <h2 class="section-title">… <span class="gilt">…</span></h2> -->
+        </div>
+        <!-- motivation + numbered contributions (ol.contribs) -->
+        <div class="card abstract slot rise"></div>
+        <!-- four feature cards linking to the sections below -->
+        <div class="grid grid-4 rise" style="margin-top:22px">
+          <div class="card feature slot short"></div>
+          <div class="card feature slot short"></div>
+          <div class="card feature slot short"></div>
+          <div class="card feature slot short"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- Method                                                              -->
+    <!-- ================================================================== -->
+    <section class="band" id="method">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Method</span>
+          <!-- <h2 class="section-title">…</h2>
+          <p class="section-sub">…</p> -->
+        </div>
+        <div class="card chart-card slot rise"></div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- Dataset                                                             -->
+    <!-- ================================================================== -->
+    <section class="band" id="dataset">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Dataset</span>
+          <!-- <h2 class="section-title">…</h2> -->
+        </div>
+        <div class="grid grid-2 rise">
+          <div class="card chart-card slot"></div>
+          <div class="card chart-card slot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- Results                                                             -->
+    <!-- ================================================================== -->
+    <section class="band" id="results">
+      <div class="wrap wrap-wide">
+        <div class="section-head">
+          <span class="eyebrow">Results</span>
+          <!-- <h2 class="section-title">…</h2> -->
+        </div>
+        <!-- results table: .table-shell > .table-scroll > table.data; mark our
+             rows with tr.ours, best cells with td.best -->
+        <div class="card chart-card slot rise"></div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- Analysis                                                            -->
+    <!-- ================================================================== -->
+    <section class="band" id="analysis">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Analysis</span>
+          <!-- <h2 class="section-title">…</h2> -->
+        </div>
+        <!-- findings: .takeaway blocks (<span class="k">01</span><p>…</p>) -->
+        <div class="grid grid-2 rise">
+          <div class="card chart-card slot"></div>
+          <div class="card chart-card slot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- Examples                                                            -->
+    <!-- ================================================================== -->
+    <section class="band" id="examples">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Examples</span>
+          <!-- <h2 class="section-title">…</h2> -->
+        </div>
+        <div class="card chart-card slot rise"></div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- Resources                                                           -->
+    <!-- ================================================================== -->
+    <section class="band" id="resources">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Resources</span>
+          <!-- <h2 class="section-title">…</h2> -->
+        </div>
+        <!-- Parked like the hero buttons: add the href and drop "pending-card". -->
+        <div class="grid grid-4 rise">
+          <a class="card feature pending-card" data-link="paper">
+            <div class="ico">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M6 3h8l4 4v14H6V3Z" stroke-linejoin="round" />
+                <path d="M14 3v4h4M9 12h6M9 16h6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <h3>Paper</h3>
+          </a>
+          <a class="card feature pending-card" data-link="code">
+            <div class="ico">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 3l-4 18" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <h3>Code</h3>
+          </a>
+          <a class="card feature pending-card" data-link="dataset">
+            <div class="ico">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <ellipse cx="12" cy="6" rx="8" ry="3" />
+                <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" />
+              </svg>
+            </div>
+            <h3>Dataset</h3>
+          </a>
+          <a class="card feature pending-card" data-link="models">
+            <div class="ico">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M12 3l7.5 4.2v9.6L12 21l-7.5-4.2V7.2L12 3Z" stroke-linejoin="round" />
+                <path d="M12 12v9M12 12 4.5 7.8M12 12l7.5-4.2" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <h3>Models</h3>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- BibTeX                                                              -->
+    <!-- ================================================================== -->
+    <section class="band-tight" id="cite">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Citation</span>
+          <h2 class="section-title">BibTeX</h2>
+        </div>
+        <!-- TODO: full author list and the arXiv id once the paper is public. -->
+        <div class="bibtex rise">
+          <div class="bibtex-bar">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="fn">prismacoder.bib</span>
+            <button class="copy-btn" id="copyBib" type="button">
+              <svg aria-hidden="true" width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="5.5" y="5.5" width="9" height="9" rx="1.6" />
+                <path d="M10.5 5.5v-3a1 1 0 0 0-1-1h-7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h3" />
+              </svg>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre id="bibtex">@article{prismacoder,
+  title={PrismaCoder: Pushing the Boundaries of Open Multimodal Code Intelligence through Decomposed Rubric Synthesis},
+  author={},
+  journal={},
+  year={}
+}</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================================================================== -->
+  <!-- Footer                                                                -->
+  <!-- ==================================================================== -->
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <div class="brand-line">
+            <img src="public/favicon-512.png" alt="">
+            <span>PrismaCoder</span>
+          </div>
+          <!-- TODO: one-line project blurb.
+          <p style="font-size:14.5px;color:var(--text-dim);max-width:380px">…</p> -->
+        </div>
+        <div>
+          <h2>Project</h2>
+          <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#method">Method</a></li>
+            <li><a href="#dataset">Dataset</a></li>
+            <li><a href="#results">Results</a></li>
+            <li><a href="#analysis">Analysis</a></li>
+            <li><a href="#examples">Examples</a></li>
+            <li><a href="#cite">Cite</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Artifacts</h2>
+          <ul>
+            <li><a href="#resources">Paper</a></li>
+            <li><a href="#resources">Code</a></li>
+            <li><a href="#resources">Dataset</a></li>
+            <li><a href="#resources">Models</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="fine">
+        <span>© 2026 The PrismaCoder authors.</span>
+        <span>Page content licensed
+          <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="static/js/main.js"></script>
+</body>
+
+</html>
