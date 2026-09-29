@@ -31,7 +31,8 @@
   }
 
   /* ---------------------------------------------------------- 1. starfield
-     A slow drift of small stars with a few gold ones. Paused when the tab is
+     A slow drift of small stars, a few tinted violet or cyan like the prism.
+     Paused when the tab is
      hidden or the light theme is on, and drawn once under reduced motion. */
   function starfield() {
     var cv = document.getElementById("starfield");
@@ -47,16 +48,16 @@
       var n = Math.round(Math.min(240, (w * h) / 7000));
       stars = [];
       for (var i = 0; i < n; i++) {
-        var gold = Math.random() < 0.22;
+        var tint = Math.random() < 0.22 ? (Math.random() < 0.55 ? "184, 178, 255" : "150, 218, 245") : null;
         stars.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          r: Math.random() * (gold ? 1.5 : 1.1) + 0.25,
+          r: Math.random() * (tint ? 1.5 : 1.1) + 0.25,
           a: Math.random() * 0.55 + 0.12,
           tw: Math.random() * 0.9 + 0.25,
           ph: Math.random() * Math.PI * 2,
           vy: (Math.random() * 0.05 + 0.012),
-          gold: gold
+          tint: tint
         });
       }
     }
@@ -65,7 +66,7 @@
       ctx.clearRect(0, 0, w, h);
       stars.forEach(function (s) {
         ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.2832);
-        ctx.fillStyle = s.gold ? "rgba(238,198,116,.4)" : "rgba(196,224,250,.32)";
+        ctx.fillStyle = "rgba(" + (s.tint || "214, 222, 250") + (s.tint ? ", .4)" : ", .32)");
         ctx.fill();
       });
     }
@@ -80,14 +81,14 @@
         var a = s.a * (0.62 + 0.38 * Math.sin(t * s.tw + s.ph));
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, 6.2832);
-        ctx.fillStyle = s.gold
-          ? "rgba(238, 198, 116, " + a.toFixed(3) + ")"
-          : "rgba(196, 224, 250, " + (a * 0.85).toFixed(3) + ")";
+        ctx.fillStyle = s.tint
+          ? "rgba(" + s.tint + ", " + a.toFixed(3) + ")"
+          : "rgba(214, 222, 250, " + (a * 0.85).toFixed(3) + ")";
         ctx.fill();
-        if (s.gold && s.r > 1.05) {
+        if (s.tint && s.r > 1.05) {
           ctx.beginPath();
           ctx.arc(s.x, s.y, s.r * 3.4, 0, 6.2832);
-          ctx.fillStyle = "rgba(226, 170, 60, " + (a * 0.07).toFixed(3) + ")";
+          ctx.fillStyle = "rgba(" + s.tint + ", " + (a * 0.07).toFixed(3) + ")";
           ctx.fill();
         }
       }
@@ -242,11 +243,37 @@
     });
   }
 
-  /* --------------------------------------------------------------- 5. init
+  /* ------------------------------------------------------------- 5. cover
+     Depth for the hero cover: the pointer position over the hero, as --mx and
+     --my in [-1, 1], moves each scene layer by its own amount (main.css). Off
+     under reduced motion and on touch screens. */
+  function cover() {
+    var scene = document.querySelector(".cover-scene");
+    var hero = document.querySelector(".hero");
+    if (!scene || !hero || reduced || !window.matchMedia("(pointer: fine)").matches) return;
+    var raf = null, mx = 0, my = 0;
+    function apply() {
+      scene.style.setProperty("--mx", mx.toFixed(3));
+      scene.style.setProperty("--my", my.toFixed(3));
+      raf = null;
+    }
+    hero.addEventListener("pointermove", function (e) {
+      var r = hero.getBoundingClientRect();
+      mx = Math.max(-1, Math.min(1, (e.clientX - r.left) / r.width * 2 - 1));
+      my = Math.max(-1, Math.min(1, (e.clientY - r.top) / r.height * 2 - 1));
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+    hero.addEventListener("pointerleave", function () {
+      mx = 0; my = 0;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+  }
+
+  /* --------------------------------------------------------------- 6. init
      Reveal runs first: .rise blocks stay hidden until it does, so a failure in
      any later step must not leave the page blank. */
   function init() {
-    [reveal, theme, starfield, nav, copyBib].forEach(function (step) {
+    [reveal, theme, starfield, nav, copyBib, cover].forEach(function (step) {
       try { step(); } catch (e) { if (window.console) console.error(e); }
     });
   }

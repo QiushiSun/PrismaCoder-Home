@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- An analytics dashboard, rendered to renders/webui.png at 1440 x 900 (see render.sh).
+     All figures on the page are placeholder data for the mock-up. -->
+<head>
+<meta charset="utf-8">
+<title>Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --ink: #111827; --ink-2: #4b5563; --ink-3: #9ca3af; --line: #eceef3;
+    --bg: #f5f6fa; --card: #ffffff;
+    --indigo: #5b5bd6; --violet: #8b5cf6; --teal: #14b8a6; --amber: #f59e0b; --rose: #f43f5e; --sky: #38bdf8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1440px; height: 900px; font-family: Inter, -apple-system, "Segoe UI", sans-serif;
+         color: var(--ink); background: var(--bg); display: grid; grid-template-columns: 232px 1fr; overflow: hidden; }
+
+  /* sidebar */
+  aside { background: #14142b; color: #c7c9e6; padding: 26px 18px; display: flex; flex-direction: column; gap: 26px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 700; font-size: 17px; }
+  .brand i { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, #7c7cf2, #22d3ee); }
+  nav { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+  nav a { display: flex; align-items: center; gap: 11px; padding: 10px 12px; border-radius: 10px; color: inherit; text-decoration: none; }
+  nav a b { width: 16px; height: 16px; border-radius: 5px; border: 2px solid currentColor; opacity: .75; }
+  nav a.on { background: rgba(124, 124, 242, .18); color: #fff; }
+  nav a.on b { background: #7c7cf2; border-color: #7c7cf2; opacity: 1; }
+  .side-card { margin-top: auto; padding: 16px; border-radius: 14px; background: linear-gradient(145deg, #2a2a5c, #1c1c3d); font-size: 13px; line-height: 1.5; }
+  .side-card strong { display: block; color: #fff; font-size: 14px; margin-bottom: 4px; }
+  .side-card span { display: inline-block; margin-top: 10px; padding: 7px 12px; border-radius: 8px; background: #7c7cf2; color: #fff; font-weight: 600; }
+
+  /* main */
+  main { padding: 26px 30px; display: grid; gap: 20px; grid-template-rows: auto auto 1fr auto; overflow: hidden; }
+  header { display: flex; align-items: center; gap: 14px; }
+  header h1 { font-size: 24px; font-weight: 700; letter-spacing: -.01em; }
+  header p { color: var(--ink-3); font-size: 13px; margin-top: 2px; }
+  .search { margin-left: auto; width: 260px; height: 40px; border-radius: 11px; background: var(--card); border: 1px solid var(--line); color: var(--ink-3); font-size: 13px; display: flex; align-items: center; padding: 0 14px; }
+  .pill { height: 40px; padding: 0 14px; border-radius: 11px; background: var(--card); border: 1px solid var(--line); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #f9a8d4, #a78bfa); }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; box-shadow: 0 1px 2px rgba(17, 24, 39, .04); }
+  .card h2 { font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; }
+  .card h2 small { font-size: 12px; font-weight: 500; color: var(--ink-3); }
+
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .kpi { display: grid; grid-template-columns: 1fr auto; row-gap: 6px; }
+  .kpi .label { color: var(--ink-2); font-size: 13px; }
+  .kpi .value { font-size: 26px; font-weight: 700; letter-spacing: -.02em; }
+  .kpi .delta { align-self: start; font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; }
+  .up { color: #047857; background: #d1fae5; } .down { color: #be123c; background: #ffe4e6; }
+  .kpi svg { grid-column: 1 / -1; width: 100%; height: 36px; }
+
+  .row { display: grid; grid-template-columns: 1.9fr 1fr; gap: 16px; min-height: 0; }
+  .chart { display: flex; flex-direction: column; }
+  .chart svg { width: 100%; flex: 1; min-height: 0; margin-top: 8px; }
+  .legend { display: flex; gap: 16px; font-size: 12px; color: var(--ink-2); }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+  .sources { display: flex; flex-direction: column; justify-content: space-between; gap: 14px; }
+  .donut { display: flex; align-items: center; gap: 18px; margin-top: 10px; }
+  .donut ul { list-style: none; display: grid; gap: 9px; font-size: 13px; color: var(--ink-2); flex: 1; }
+  .donut li { display: flex; align-items: center; gap: 8px; }
+  .donut li i { width: 9px; height: 9px; border-radius: 50%; }
+  .donut li b { margin-left: auto; color: var(--ink); }
+  .bars { display: grid; gap: 10px; font-size: 12.5px; color: var(--ink-2); }
+  .bars div { display: grid; grid-template-columns: 90px 1fr 38px; align-items: center; gap: 10px; }
+  .bars span { height: 8px; border-radius: 99px; background: #eef0f6; position: relative; overflow: hidden; }
+  .bars span::after { content: ""; position: absolute; inset: 0; width: var(--w); border-radius: 99px; background: linear-gradient(90deg, #7c7cf2, #22d3ee); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  th { text-align: left; color: var(--ink-3); font-weight: 500; font-size: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  td { padding: 9px 0; border-bottom: 1px solid var(--line); }
+  tr:last-child td { border-bottom: 0; }
+  .who { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+  .who i { width: 26px; height: 26px; border-radius: 50%; }
+  .tag { font-size: 11.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; }
+  .ok { color: #047857; background: #d1fae5; } .wait { color: #b45309; background: #fef3c7; } .back { color: #be123c; background: #ffe4e6; }
+</style>
+</head>
+<body>
+  <aside>
+    <div class="brand"><i></i>Workspace</div>
+    <nav>
+      <a class="on"><b></b>Overview</a>
+      <a><b></b>Analytics</a>
+      <a><b></b>Projects</a>
+      <a><b></b>Customers</a>
+      <a><b></b>Reports</a>
+      <a><b></b>Settings</a>
+    </nav>
+    <div class="side-card"><strong>Upgrade to Pro</strong>Unlock custom reports and team seats.<br><span>Upgrade</span></div>
+  </aside>
+
+  <main>
+    <header>
+      <div><h1>Overview</h1><p>Performance over the last 30 days</p></div>
+      <div class="search">Search reports, customers…</div>
+      <div class="pill">Sep 1 – Sep 30</div>
+      <div class="avatar"></div>
+    </header>
+
+    <section class="kpis">
+      <div class="card kpi"><span class="label">Revenue</span><span class="delta up">+12.4%</span><span class="value">$48,210</span>
+        <svg viewBox="0 0 200 36" preserveAspectRatio="none"><path d="M0 30 L20 26 L40 28 L60 20 L80 22 L100 14 L120 17 L140 10 L160 12 L180 6 L200 8" fill="none" stroke="#5b5bd6" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+      <div class="card kpi"><span class="label">Active users</span><span class="delta up">+8.1%</span><span class="value">12,480</span>
+        <svg viewBox="0 0 200 36" preserveAspectRatio="none"><path d="M0 26 L20 28 L40 22 L60 24 L80 16 L100 18 L120 12 L140 15 L160 9 L180 11 L200 5" fill="none" stroke="#14b8a6" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+      <div class="card kpi"><span class="label">Conversion</span><span class="delta down">−0.4%</span><span class="value">3.92%</span>
+        <svg viewBox="0 0 200 36" preserveAspectRatio="none"><path d="M0 10 L20 12 L40 9 L60 15 L80 13 L100 18 L120 16 L140 20 L160 19 L180 24 L200 22" fill="none" stroke="#f43f5e" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+      <div class="card kpi"><span class="label">Avg. session</span><span class="delta up">+5.6%</span><span class="value">4m 12s</span>
+        <svg viewBox="0 0 200 36" preserveAspectRatio="none"><path d="M0 24 L20 20 L40 23 L60 17 L80 19 L100 13 L120 16 L140 11 L160 14 L180 8 L200 10" fill="none" stroke="#f59e0b" stroke-width="2.4" stroke-linejoin="round"/></svg></div>
+    </section>
+
+    <section class="row">
+      <div class="card chart">
+        <h2>Revenue <span class="legend"><span><i style="background:#5b5bd6"></i>This period</span><span><i style="background:#c7c9f5"></i>Last period</span></span></h2>
+        <svg viewBox="0 0 760 250" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="fillA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b5bd6" stop-opacity=".32"/><stop offset="1" stop-color="#5b5bd6" stop-opacity="0"/></linearGradient>
+          </defs>
+          <g stroke="#eef0f6" stroke-width="1"><path d="M40 30 H760 M40 80 H760 M40 130 H760 M40 180 H760 M40 230 H760"/></g>
+          <g fill="#9ca3af" font-size="11" font-family="Inter, sans-serif">
+            <text x="0" y="34">60k</text><text x="0" y="84">45k</text><text x="0" y="134">30k</text><text x="0" y="184">15k</text><text x="8" y="234">0</text>
+          </g>
+          <path d="M40 170 C 90 160 110 150 150 152 S 230 120 270 128 S 350 150 390 124 S 470 80 510 92 S 590 110 630 78 S 710 60 760 64" fill="none" stroke="#c7c9f5" stroke-width="2.5" stroke-dasharray="6 6"/>
+          <path d="M40 150 C 90 140 110 118 150 122 S 230 96 270 102 S 350 120 390 92 S 470 50 510 62 S 590 76 630 44 S 710 30 760 36 V230 H40 Z" fill="url(#fillA)"/>
+          <path d="M40 150 C 90 140 110 118 150 122 S 230 96 270 102 S 350 120 390 92 S 470 50 510 62 S 590 76 630 44 S 710 30 760 36" fill="none" stroke="#5b5bd6" stroke-width="3"/>
+          <line x1="630" y1="44" x2="630" y2="230" stroke="#5b5bd6" stroke-dasharray="3 4" opacity=".5"/>
+          <circle cx="630" cy="44" r="6" fill="#fff" stroke="#5b5bd6" stroke-width="3"/>
+          <g transform="translate(560 -2)"><rect width="140" height="34" rx="8" fill="#111827"/><text x="12" y="22" fill="#fff" font-size="12.5" font-family="Inter, sans-serif" font-weight="600">Sep 24 · $4,820</text></g>
+        </svg>
+      </div>
+      <div class="card sources">
+        <h2>Traffic sources <small>30 days</small></h2>
+        <div class="donut">
+          <svg width="128" height="128" viewBox="0 0 42 42">
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#eef0f6" stroke-width="6"/>
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#5b5bd6" stroke-width="6" stroke-dasharray="42 58" stroke-dashoffset="25"/>
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#22d3ee" stroke-width="6" stroke-dasharray="26 74" stroke-dashoffset="83"/>
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#f59e0b" stroke-width="6" stroke-dasharray="18 82" stroke-dashoffset="57"/>
+            <circle cx="21" cy="21" r="15.9" fill="none" stroke="#f43f5e" stroke-width="6" stroke-dasharray="14 86" stroke-dashoffset="39"/>
+          </svg>
+          <ul>
+            <li><i style="background:#5b5bd6"></i>Organic<b>42%</b></li>
+            <li><i style="background:#22d3ee"></i>Direct<b>26%</b></li>
+            <li><i style="background:#f59e0b"></i>Referral<b>18%</b></li>
+            <li><i style="background:#f43f5e"></i>Social<b>14%</b></li>
+          </ul>
+        </div>
+        <div class="bars">
+          <div>Desktop<span style="--w:72%"></span>72%</div>
+          <div>Mobile<span style="--w:54%"></span>54%</div>
+          <div>Tablet<span style="--w:21%"></span>21%</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Recent orders <small>View all</small></h2>
+      <table>
+        <tr><th>Customer</th><th>Product</th><th>Date</th><th>Amount</th><th>Status</th></tr>
+        <tr><td><span class="who"><i style="background:#c7d2fe"></i>Mia Chen</span></td><td>Team plan</td><td>Sep 29</td><td>$1,200</td><td><span class="tag ok">Paid</span></td></tr>
+        <tr><td><span class="who"><i style="background:#99f6e4"></i>Leo Park</span></td><td>Pro seat × 4</td><td>Sep 28</td><td>$384</td><td><span class="tag wait">Pending</span></td></tr>
+        <tr><td><span class="who"><i style="background:#fde68a"></i>Ava Rossi</span></td><td>Analytics add-on</td><td>Sep 28</td><td>$96</td><td><span class="tag ok">Paid</span></td></tr>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

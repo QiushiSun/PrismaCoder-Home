@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- A project board, rendered to renders/kanban.png at 1440 x 720 (see render.sh).
+     Tasks, people and dates are placeholders for the mock-up. -->
+<head>
+<meta charset="utf-8">
+<title>Sprint board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  :root { --ink: #151827; --ink-2: #5a6078; --ink-3: #9aa0b6; --line: #e7e9f1; --bg: #f3f4f9; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1440px; height: 720px; overflow: hidden; font-family: Inter, -apple-system, "Segoe UI", sans-serif;
+         color: var(--ink); background: var(--bg); display: flex; flex-direction: column; }
+
+  header { height: 64px; flex: none; display: flex; align-items: center; gap: 18px; padding: 0 28px;
+           background: #fff; border-bottom: 1px solid var(--line); }
+  .proj { display: flex; align-items: center; gap: 11px; font-weight: 700; font-size: 17px; }
+  .proj i { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, #fb7185, #8b5cf6 60%, #38bdf8); }
+  .proj small { font-weight: 500; font-size: 13px; color: var(--ink-3); margin-left: 4px; }
+  .tabs { display: flex; gap: 22px; margin-left: 28px; font-size: 14px; color: var(--ink-2); height: 100%; }
+  .tabs span { display: flex; align-items: center; border-bottom: 2px solid transparent; }
+  .tabs .on { color: var(--ink); font-weight: 600; border-bottom-color: #7c5cf6; }
+  .people { margin-left: auto; display: flex; }
+  .people b { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff; margin-left: -5px; display: grid; place-items: center;
+              font-size: 10px; color: #fff; font-weight: 700; }
+  .btn { height: 36px; padding: 0 14px; border-radius: 9px; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600;
+         border: 1px solid var(--line); background: #fff; color: var(--ink-2); }
+  .btn.main { background: #7c5cf6; border-color: #7c5cf6; color: #fff; }
+
+  .board { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 22px 28px; min-height: 0; }
+  .col { background: #eceef6; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+  .col h3 { display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; padding: 2px 4px 4px; }
+  .col h3 i { width: 9px; height: 9px; border-radius: 50%; }
+  .col h3 em { font-style: normal; font-size: 12px; color: var(--ink-2); background: #fff; border-radius: 99px; padding: 1px 8px; }
+  .col h3 span { margin-left: auto; color: var(--ink-3); font-size: 18px; font-weight: 400; }
+
+  .card { background: #fff; border-radius: 13px; padding: 13px 14px; border: 1px solid var(--line);
+          box-shadow: 0 1px 2px rgba(21, 24, 39, .05); display: flex; flex-direction: column; gap: 9px; }
+  .card.drag { transform: rotate(-2.5deg) translateY(-4px); box-shadow: 0 18px 34px -12px rgba(60, 40, 140, .35); border-color: #d9d2fb; }
+  .drop { height: 64px; border-radius: 13px; border: 2px dashed #c8bff5; background: rgba(124, 92, 246, .06); }
+  .tags { display: flex; gap: 6px; }
+  .tag { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 6px; }
+  .t-design { color: #be185d; background: #fce7f3; } .t-front { color: #1d4ed8; background: #dbeafe; }
+  .t-bug { color: #b91c1c; background: #fee2e2; } .t-docs { color: #b45309; background: #fef3c7; }
+  .t-data { color: #047857; background: #d1fae5; } .t-research { color: #6d28d9; background: #ede9fe; }
+  .t-ops { color: #0e7490; background: #cffafe; }
+  .card h4 { font-size: 14px; font-weight: 600; line-height: 1.35; }
+  .card p { font-size: 12.5px; color: var(--ink-2); line-height: 1.45; }
+  .cover { height: 92px; border-radius: 9px; overflow: hidden; }
+  .progress { height: 6px; border-radius: 99px; background: #eef0f6; overflow: hidden; }
+  .progress i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #8b5cf6, #38bdf8); }
+  .meta { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--ink-3); }
+  .meta .who { display: flex; margin-left: auto; }
+  .meta .who b { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; margin-left: -6px; }
+  .meta svg { width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px; }
+  .due { color: #b45309; background: #fef3c7; padding: 2px 7px; border-radius: 6px; font-weight: 600; }
+  .done h4 { color: var(--ink-2); text-decoration: line-through; text-decoration-color: #c3c7d6; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="proj"><i></i>Sprint board<small>Product · Q4</small></div>
+    <div class="tabs"><span class="on">Board</span><span>List</span><span>Timeline</span><span>Calendar</span></div>
+    <div class="people">
+      <b style="background:#f472b6">MC</b><b style="background:#60a5fa">LP</b><b style="background:#34d399">AR</b><b style="background:#fbbf24">JK</b>
+    </div>
+    <div class="btn">Filter</div>
+    <div class="btn main">+ New task</div>
+  </header>
+
+  <main class="board">
+    <section class="col">
+      <h3><i style="background:#9aa0b6"></i>Backlog <em>3</em><span>+</span></h3>
+      <div class="card"><div class="tags"><span class="tag t-research">Research</span></div>
+        <h4>Interview users about onboarding drop-off</h4>
+        <div class="meta"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3h12v8H6l-4 3V3Z"/></svg>6</span>
+          <span class="who"><b style="background:#f472b6"></b></span></div></div>
+      <div class="card"><div class="tags"><span class="tag t-design">Design</span><span class="tag t-front">Accessibility</span></div>
+        <h4>Audit colour contrast across charts</h4>
+        <p>WCAG AA for every text and chart label.</p>
+        <div class="meta"><span class="due">Oct 12</span><span class="who"><b style="background:#60a5fa"></b><b style="background:#34d399"></b></span></div></div>
+      <div class="card"><div class="tags"><span class="tag t-data">Data</span></div>
+        <h4>Plan Q4 analytics events</h4>
+        <div class="meta"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8l3 3 7-7"/></svg>0/5</span>
+          <span class="who"><b style="background:#fbbf24"></b></span></div></div>
+    </section>
+
+    <section class="col">
+      <h3><i style="background:#8b5cf6"></i>In progress <em>3</em><span>+</span></h3>
+      <div class="card"><div class="tags"><span class="tag t-front">Frontend</span></div>
+        <div class="cover"><svg viewBox="0 0 300 92" preserveAspectRatio="none" width="100%" height="100%">
+          <defs><linearGradient id="c1" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#7dd3fc"/></linearGradient></defs>
+          <rect width="300" height="92" fill="url(#c1)"/>
+          <rect x="22" y="18" width="76" height="58" rx="7" fill="#fff" opacity=".92"/><rect x="112" y="12" width="76" height="68" rx="7" fill="#fff"/>
+          <rect x="202" y="18" width="76" height="58" rx="7" fill="#fff" opacity=".92"/>
+          <rect x="124" y="24" width="40" height="7" rx="3" fill="#8b5cf6"/><rect x="124" y="38" width="52" height="5" rx="2.5" fill="#d8d3f5"/>
+          <rect x="124" y="62" width="52" height="11" rx="5" fill="#8b5cf6"/>
+        </svg></div>
+        <h4>Build the pricing page</h4>
+        <div class="progress"><i style="width:62%"></i></div>
+        <div class="meta"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8l3 3 7-7"/></svg>5/8</span>
+          <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3h12v8H6l-4 3V3Z"/></svg>12</span>
+          <span class="who"><b style="background:#60a5fa"></b><b style="background:#f472b6"></b></span></div></div>
+      <div class="card drag"><div class="tags"><span class="tag t-design">Design</span></div>
+        <h4>Dark-mode tokens for the chart library</h4>
+        <div class="meta"><span class="due">Oct 3</span><span class="who"><b style="background:#34d399"></b></span></div></div>
+      <div class="drop"></div>
+      <div class="card"><div class="tags"><span class="tag t-bug">Bug</span></div>
+        <h4>Tooltip overflows on narrow charts</h4>
+        <div class="meta"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3h12v8H6l-4 3V3Z"/></svg>3</span>
+          <span class="who"><b style="background:#fbbf24"></b></span></div></div>
+    </section>
+
+    <section class="col">
+      <h3><i style="background:#38bdf8"></i>Review <em>2</em><span>+</span></h3>
+      <div class="card"><div class="tags"><span class="tag t-design">Design</span><span class="tag t-front">SVG</span></div>
+        <div class="cover" style="background:#f7f5ff;display:grid;grid-template-columns:repeat(6,1fr);place-items:center;padding:10px">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M3 11 12 4l9 7v9H3z"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"><circle cx="11" cy="11" r="6"/><path d="m16 16 5 5"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/><circle cx="12" cy="12" r="5"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M20 12a8 8 0 1 1-8-8"/><path d="M20 4v6h-6"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10Z"/></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12l3 3 5-6"/></svg>
+        </div>
+        <h4>Export the SVG icon set</h4>
+        <div class="meta"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8l3 3 7-7"/></svg>6/6</span>
+          <span class="who"><b style="background:#f472b6"></b><b style="background:#34d399"></b></span></div></div>
+      <div class="card"><div class="tags"><span class="tag t-front">Frontend</span><span class="tag t-data">Data</span></div>
+        <h4>Migrate dashboards to Vega-Lite</h4>
+        <p>Keep every spec under 200 lines.</p>
+        <div class="progress"><i style="width:84%"></i></div>
+        <div class="meta"><span class="due">Oct 8</span><span class="who"><b style="background:#60a5fa"></b></span></div></div>
+    </section>
+
+    <section class="col">
+      <h3><i style="background:#34d399"></i>Done <em>3</em><span>+</span></h3>
+      <div class="card done"><div class="tags"><span class="tag t-ops">DevOps</span></div>
+        <h4>Preview deployments for every PR</h4>
+        <div class="meta"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8l3 3 7-7"/></svg>4/4</span><span class="who"><b style="background:#fbbf24"></b></span></div></div>
+      <div class="card done"><div class="tags"><span class="tag t-docs">Docs</span></div>
+        <h4>API reference for the export endpoint</h4>
+        <div class="meta"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3h12v8H6l-4 3V3Z"/></svg>9</span><span class="who"><b style="background:#60a5fa"></b></span></div></div>
+      <div class="card done"><div class="tags"><span class="tag t-docs">Docs</span></div>
+        <h4>Release notes</h4>
+        <div class="meta"><span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8l3 3 7-7"/></svg>3/3</span><span class="who"><b style="background:#34d399"></b></span></div></div>
+    </section>
+  </main>
+</body>
+</html>

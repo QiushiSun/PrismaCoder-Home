@@ -1,8 +1,9 @@
 /* ==========================================================================
    PrismaCoder — project page
-   Two themes off one token set, carried over from the OSReward page: dark is
-   deep navy + gold, light is the same palette on warm paper. Structure: split
-   hero, byline band, then article sections.
+   Two themes off one token set. The palette is sampled from the prism in
+   public/logo.png: indigo-violet accent, cyan for data. Dark is night indigo,
+   light is the same palette on cool white. Structure: split hero, byline band,
+   then article sections.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -11,48 +12,48 @@
 :root {
   color-scheme: dark;
 
-  /* Gold — the 鎏金 accent */
-  --gold-100: #fbf4d6;
-  --gold-200: #f0dca2;
-  --gold-300: #e2c377;
-  --gold-400: #cfa54b;
-  --gold-500: #b8862a;
-  --gold-600: #92671c;
+  /* Accent — indigo-violet, the prism body */
+  --accent-100: #eceeff;
+  --accent-200: #cfd3ff;
+  --accent-300: #aeb5ff;
+  --accent-400: #9099f5;
+  --accent-500: #727ae3;
+  --accent-600: #585ec6;
 
-  /* Cyan — screens, plots, live data */
-  --cyan-200: #a8e8f2;
-  --cyan-300: #6fcfe0;
-  --cyan-400: #3fb2c9;
-  --cyan-500: #1d86a6;
+  /* Cyan — the prism's light faces; plots, live data */
+  --cyan-200: #b4ecf8;
+  --cyan-300: #7fd4ea;
+  --cyan-400: #4cb9d5;
+  --cyan-500: #2a93b2;
 
   /* Text */
-  --text-hi: #eaf1f9;
-  --text: #bfd0e2;
-  --text-dim: #8aa1bb;
-  --text-faint: #677d99;
+  --text-hi: #eceefd;
+  --text: #c3c8e4;
+  --text-dim: #8e95ba;
+  --text-faint: #6b7197;
 
   /* Semantic (charts) */
   --ok: #58c7a4;
   --bad: #e0736b;
 
   /* Surfaces */
-  --bg: #050c19;
-  --surface-1: rgba(11, 26, 48, 0.58);
-  --surface-1b: rgba(6, 16, 33, 0.62);
-  --surface-2: rgba(9, 22, 42, 0.9);
-  --surface-3: rgba(6, 15, 30, 0.97);
-  --ring: #050c19;
+  --bg: #090b1a;
+  --surface-1: rgba(22, 25, 52, 0.58);
+  --surface-1b: rgba(14, 16, 36, 0.64);
+  --surface-2: rgba(17, 19, 42, 0.92);
+  --surface-3: rgba(11, 13, 30, 0.97);
+  --ring: #090b1a;
 
-  --hairline: rgba(207, 165, 75, 0.18);
-  --hairline-strong: rgba(207, 165, 75, 0.36);
-  --hairline-cool: rgba(122, 158, 200, 0.16);
+  --hairline: rgba(144, 153, 245, 0.2);
+  --hairline-strong: rgba(144, 153, 245, 0.4);
+  --hairline-cool: rgba(150, 160, 215, 0.15);
 
   /* Charts */
-  --chart-grid: rgba(122, 158, 200, 0.11);
-  --chart-grid-minor: rgba(122, 158, 200, 0.055);
-  --chart-axis: rgba(122, 158, 200, 0.3);
-  --chart-track: rgba(122, 158, 200, 0.08);
-  --logo-plate: rgba(238, 245, 252, 0.94);
+  --chart-grid: rgba(150, 160, 215, 0.11);
+  --chart-grid-minor: rgba(150, 160, 215, 0.055);
+  --chart-axis: rgba(150, 160, 215, 0.3);
+  --chart-track: rgba(150, 160, 215, 0.08);
+  --logo-plate: rgba(240, 242, 252, 0.94);
 
   /* Type */
   --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
@@ -76,45 +77,45 @@
 :root[data-theme="light"] {
   color-scheme: light;
 
-  /* Gold darkens so it stays legible as text on paper */
-  --gold-100: #6d4d0e;
-  --gold-200: #7d5811;
-  --gold-300: #8c6414;
-  --gold-400: #a5771c;
-  --gold-500: #b98a2a;
-  --gold-600: #cba649;
+  /* The accent ramp inverts (100 = darkest) so it stays legible as text on white */
+  --accent-100: #23267a;
+  --accent-200: #2d3197;
+  --accent-300: #3a40b5;
+  --accent-400: #4b52cb;
+  --accent-500: #676de0;
+  --accent-600: #9ea3f0;
 
-  --cyan-200: #10556b;
-  --cyan-300: #14708c;
-  --cyan-400: #1a89a6;
-  --cyan-500: #2aa0bd;
+  --cyan-200: #0f5b76;
+  --cyan-300: #147594;
+  --cyan-400: #1b8cad;
+  --cyan-500: #34a6c3;
 
-  --text-hi: #14243c;
-  --text: #34475f;
-  --text-dim: #5b6d86;
-  --text-faint: #7d8ea4;
+  --text-hi: #161a33;
+  --text: #363c5c;
+  --text-dim: #5d6386;
+  --text-faint: #8389a8;
 
   --ok: #1f8a68;
   --bad: #bf4a41;
 
-  --bg: #f7f3e9;
-  --surface-1: rgba(255, 253, 248, 0.86);
-  --surface-1b: rgba(252, 249, 241, 0.9);
-  --surface-2: rgba(255, 253, 248, 0.96);
-  --surface-3: rgba(255, 253, 248, 0.99);
-  --ring: #f7f3e9;
+  --bg: #f7f8fc;
+  --surface-1: rgba(255, 255, 255, 0.84);
+  --surface-1b: rgba(250, 251, 255, 0.9);
+  --surface-2: rgba(255, 255, 255, 0.96);
+  --surface-3: rgba(255, 255, 255, 0.98);
+  --ring: #f7f8fc;
 
-  --hairline: rgba(150, 108, 26, 0.22);
-  --hairline-strong: rgba(150, 108, 26, 0.44);
-  --hairline-cool: rgba(40, 70, 110, 0.16);
+  --hairline: rgba(75, 82, 203, 0.2);
+  --hairline-strong: rgba(75, 82, 203, 0.4);
+  --hairline-cool: rgba(40, 50, 110, 0.14);
 
-  --chart-grid: rgba(40, 70, 110, 0.12);
-  --chart-grid-minor: rgba(40, 70, 110, 0.06);
-  --chart-axis: rgba(40, 70, 110, 0.32);
-  --chart-track: rgba(40, 70, 110, 0.07);
+  --chart-grid: rgba(40, 50, 110, 0.12);
+  --chart-grid-minor: rgba(40, 50, 110, 0.06);
+  --chart-axis: rgba(40, 50, 110, 0.32);
+  --chart-track: rgba(40, 50, 110, 0.06);
   --logo-plate: rgba(255, 255, 255, 0);
 
-  --shadow: 0 12px 30px -20px rgba(60, 45, 15, 0.45);
+  --shadow: 0 12px 30px -20px rgba(30, 36, 90, 0.4);
 }
 
 /* --------------------------------------------------------------------------
@@ -162,11 +163,11 @@ h1, h2, h3, h4 {
 p { margin: 0 0 1em; }
 p:last-child { margin-bottom: 0; }
 
-a { color: var(--gold-300); text-decoration: none; transition: color 0.18s ease; }
-a:hover { color: var(--gold-200); }
+a { color: var(--accent-300); text-decoration: none; transition: color 0.18s ease; }
+a:hover { color: var(--accent-200); }
 
 strong { color: var(--text-hi); font-weight: 600; }
-em { color: var(--gold-200); font-style: italic; }
+em { color: var(--accent-200); font-style: italic; }
 
 code, kbd {
   font-family: var(--font-mono);
@@ -178,9 +179,9 @@ code, kbd {
   padding: 0.08em 0.36em;
 }
 
-::selection { background: rgba(207, 165, 75, 0.28); }
+::selection { background: rgba(114, 122, 227, 0.3); }
 
-:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 3px; border-radius: 4px; }
+:focus-visible { outline: 2px solid var(--accent-400); outline-offset: 3px; border-radius: 4px; }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px;
@@ -190,7 +191,7 @@ code, kbd {
 
 .skip-link {
   position: absolute; left: 50%; top: -80px; transform: translateX(-50%);
-  z-index: 200; background: var(--surface-3); color: var(--gold-300);
+  z-index: 200; background: var(--surface-3); color: var(--accent-300);
   border: 1px solid var(--hairline-strong); border-radius: 0 0 10px 10px;
   padding: 11px 20px; font-size: 15px; transition: top 0.2s ease;
 }
@@ -205,19 +206,19 @@ code, kbd {
   z-index: -2;
   pointer-events: none;
   background:
-    radial-gradient(1100px 700px at 14% -6%, rgba(14, 70, 128, 0.34), transparent 64%),
-    radial-gradient(900px 600px at 88% 4%,   rgba(150, 106, 26, 0.16), transparent 62%),
-    radial-gradient(1200px 900px at 52% 40%, rgba(9, 44, 92, 0.28), transparent 70%),
-    radial-gradient(1000px 780px at 8% 74%,  rgba(12, 52, 104, 0.20), transparent 66%),
-    radial-gradient(950px 720px at 94% 92%,  rgba(126, 88, 20, 0.12), transparent 64%),
-    linear-gradient(168deg, #081428 0%, #05101f 34%, #040c1a 66%, #050c19 100%);
+    radial-gradient(1100px 700px at 14% -6%, rgba(52, 58, 160, 0.30), transparent 64%),
+    radial-gradient(900px 600px at 88% 4%,   rgba(104, 70, 168, 0.16), transparent 62%),
+    radial-gradient(1200px 900px at 52% 40%, rgba(26, 30, 88, 0.30), transparent 70%),
+    radial-gradient(1000px 780px at 8% 74%,  rgba(24, 58, 108, 0.18), transparent 66%),
+    radial-gradient(950px 720px at 94% 92%,  rgba(92, 54, 130, 0.12), transparent 64%),
+    linear-gradient(168deg, #0d1026 0%, #0a0c1f 34%, #080a1a 66%, #090b1a 100%);
 }
 :root[data-theme="light"] .cosmos {
   background:
-    radial-gradient(1000px 620px at 16% -8%, rgba(198, 216, 238, 0.62), transparent 62%),
-    radial-gradient(820px 560px at 86% 2%,  rgba(228, 208, 158, 0.44), transparent 60%),
-    radial-gradient(1100px 820px at 50% 48%, rgba(238, 231, 214, 0.7), transparent 70%),
-    linear-gradient(180deg, #fbf8f0 0%, #f7f3e9 52%, #f4efe3 100%);
+    radial-gradient(1000px 620px at 16% -8%, rgba(214, 218, 250, 0.62), transparent 62%),
+    radial-gradient(820px 560px at 86% 2%,  rgba(228, 216, 248, 0.5), transparent 60%),
+    radial-gradient(1100px 820px at 50% 48%, rgba(236, 240, 251, 0.7), transparent 70%),
+    linear-gradient(180deg, #fafbfe 0%, #f7f8fc 52%, #f3f5fb 100%);
 }
 
 #starfield {
@@ -253,7 +254,7 @@ section { position: relative; }
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold-400);
+  color: var(--accent-400);
   margin-bottom: 14px;
 }
 .eyebrow::before, .eyebrow::after {
@@ -266,18 +267,14 @@ section { position: relative; }
 h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
 .section-sub { color: var(--text-dim); font-size: 17px; max-width: 860px; margin: 0 auto; }
 
-/* Gold-leaf gradient text */
-.gilt {
-  background: linear-gradient(176deg, var(--gold-200) 6%, var(--gold-300) 42%, var(--gold-500) 100%);
+/* Gradient text, indigo into cyan like the prism's faces. The accent and cyan
+   ramps invert with the theme, so one rule serves both. */
+.grad-text {
+  background: linear-gradient(100deg, var(--accent-200) 0%, var(--accent-400) 50%, var(--cyan-300) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-}
-:root[data-theme="light"] .gilt {
-  background: linear-gradient(176deg, var(--gold-400) 4%, var(--gold-300) 46%, var(--gold-100) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
 }
 
 /* --------------------------------------------------------------------------
@@ -314,7 +311,7 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
 }
 .nav.stuck .nav-brand { opacity: 1; transform: none; pointer-events: auto; }
 .nav-brand img { width: 30px; height: 30px; }
-.nav-brand i { font-style: normal; color: var(--gold-400); font-weight: 400; padding: 0 1px; }
+.nav-brand i { font-style: normal; color: var(--accent-400); font-weight: 400; padding: 0 1px; }
 
 .nav-links {
   margin-left: auto;
@@ -329,8 +326,8 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
   border-radius: 8px;
   transition: color 0.16s ease, background 0.16s ease;
 }
-.nav-links a:hover { color: var(--gold-300); background: var(--chart-track); }
-.nav-links a.active { color: var(--gold-300); }
+.nav-links a:hover { color: var(--accent-300); background: var(--chart-track); }
+.nav-links a.active { color: var(--accent-300); }
 
 /* "More research" — the sibling-project menu the reference pages carry */
 .nav-more { position: relative; }
@@ -347,7 +344,7 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
   transition: color 0.16s ease, background 0.16s ease;
 }
 .nav-more > button:hover,
-.nav-more[data-open="true"] > button { color: var(--gold-300); background: var(--chart-track); }
+.nav-more[data-open="true"] > button { color: var(--accent-300); background: var(--chart-track); }
 .nav-more > button svg { width: 10px; height: 10px; transition: transform 0.18s ease; }
 .nav-more[data-open="true"] > button svg { transform: rotate(180deg); }
 .nav-more ul {
@@ -373,7 +370,7 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
   color: var(--text);
   white-space: nowrap;
 }
-.nav-more ul a:hover { background: var(--chart-track); color: var(--gold-300); }
+.nav-more ul a:hover { background: var(--chart-track); color: var(--accent-300); }
 .nav-more ul a > span { display: flex; flex-direction: column; line-height: 1.3; }
 .nav-more ul a small { color: var(--text-faint); font-size: 11px; }
 .nav-more ul a img {
@@ -400,11 +397,11 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
   border-radius: 9px;
   border: 1px solid var(--hairline);
   background: var(--chart-track);
-  color: var(--gold-300);
+  color: var(--accent-300);
   cursor: pointer;
   transition: color 0.16s ease, border-color 0.16s ease, background 0.16s ease;
 }
-.icon-btn:hover { color: var(--gold-200); border-color: var(--hairline-strong); }
+.icon-btn:hover { color: var(--accent-200); border-color: var(--hairline-strong); }
 .icon-btn svg { width: 16px; height: 16px; }
 /* one icon per theme */
 .icon-btn .i-sun { display: none; }
@@ -418,10 +415,8 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
    -------------------------------------------------------------------------- */
 .hero { position: relative; padding: 100px 0 40px; overflow: hidden; }
 
-/* The cover art is a deep-navy, gold-filigreed square. On flat background it
-   reads as a pasted rectangle, so the hero carries its own drifting nebula:
-   cool field on the left, a warm gold bloom behind the art on the right, both
-   fading to nothing before the byline. */
+/* A cool field behind the title, fading before the byline. The cover on the
+   right brings its own light (the spectrum fan), so nothing blooms there. */
 .hero::before {
   content: "";
   position: absolute;
@@ -429,18 +424,14 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(58% 62% at 74% 46%, rgba(18, 74, 150, 0.50), transparent 72%),
-    radial-gradient(38% 46% at 84% 30%, rgba(176, 126, 34, 0.30), transparent 74%),
-    radial-gradient(64% 70% at 18% 24%, rgba(10, 44, 96, 0.46), transparent 72%),
-    radial-gradient(50% 44% at 46% 96%, rgba(8, 28, 62, 0.40), transparent 76%);
+    radial-gradient(64% 70% at 18% 24%, rgba(40, 46, 130, 0.42), transparent 72%),
+    radial-gradient(50% 44% at 46% 96%, rgba(16, 20, 60, 0.40), transparent 76%);
   -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
   mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 100%);
 }
 :root[data-theme="light"] .hero::before {
   background:
-    radial-gradient(58% 62% at 74% 46%, rgba(196, 214, 238, 0.55), transparent 72%),
-    radial-gradient(38% 46% at 84% 28%, rgba(230, 208, 152, 0.45), transparent 74%),
-    radial-gradient(64% 70% at 18% 24%, rgba(214, 224, 238, 0.5), transparent 72%);
+    radial-gradient(64% 70% at 18% 24%, rgba(220, 224, 250, 0.55), transparent 72%);
 }
 
 .hero-split {
@@ -470,7 +461,7 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
   font-size: 12.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gold-400);
+  color: var(--accent-400);
   font-weight: 600;
   margin-bottom: 18px;
 }
@@ -484,7 +475,7 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
   width: 26px; height: 26px;
   display: grid; place-items: center;
   border-radius: 7px;
-  color: var(--gold-300);
+  color: var(--accent-300);
   background: var(--chart-track);
   border: 1px solid var(--hairline);
   margin-top: 1px;
@@ -492,37 +483,37 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
 .bullets .b-ico svg { width: 14px; height: 14px; }
 .bullets b { color: var(--text-hi); font-weight: 600; }
 
-/* Cover plate. Dark theme: a thin gilt edge, the art continues the background.
-   Light theme: the art is deep navy on warm paper, so it is matted like a
-   framed print — cream mat, fine gold rule, soft drop shadow — which is what
-   makes a dark image sit on a light page instead of punching a hole in it. */
+/* Framed art (for a raster cover). Dark theme: a thin accent edge, the art
+   continues the background. Light theme: a dark image is matted like a framed
+   print (white mat, fine accent rule, soft drop shadow) so it sits on the page
+   instead of punching a hole in it. */
 .plate {
   margin: 0;
   position: relative;
   border-radius: var(--r-lg);
   padding: 6px;
-  background: linear-gradient(150deg, rgba(207, 165, 75, 0.42), rgba(122, 158, 200, 0.10) 52%, rgba(207, 165, 75, 0.22));
+  background: linear-gradient(150deg, rgba(144, 153, 245, 0.42), rgba(150, 160, 215, 0.10) 52%, rgba(144, 153, 245, 0.22));
   box-shadow:
-    0 26px 80px -34px rgba(16, 60, 124, 0.85),
-    0 0 110px -24px rgba(168, 118, 30, 0.30);
+    0 26px 80px -34px rgba(30, 34, 110, 0.85),
+    0 0 110px -24px rgba(110, 90, 200, 0.30);
 }
 .plate img { display: block; width: 100%; height: auto; border-radius: 12px; }
 
 :root[data-theme="light"] .plate {
   padding: 20px;
   border-radius: 6px;
-  background: linear-gradient(168deg, #fffdf8 0%, #f6f1e4 100%);
+  background: linear-gradient(168deg, #ffffff 0%, #f1f3fa 100%);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.9) inset,
-    0 0 0 1px rgba(150, 108, 26, 0.28),
-    0 22px 44px -26px rgba(60, 45, 15, 0.55);
+    0 0 0 1px rgba(75, 82, 203, 0.28),
+    0 22px 44px -26px rgba(30, 36, 90, 0.45);
 }
 :root[data-theme="light"] .plate::after {
-  /* the fine gold rule between mat and image */
+  /* the fine accent rule between mat and image */
   content: "";
   position: absolute;
   inset: 14px;
-  border: 1px solid rgba(150, 108, 26, 0.42);
+  border: 1px solid rgba(75, 82, 203, 0.42);
   border-radius: 4px;
   pointer-events: none;
 }
@@ -531,16 +522,210 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
   box-shadow: 0 2px 10px -3px rgba(20, 36, 60, 0.5);
 }
 
-/* Hero art without a plate: the transparent prism mark floats on the page
-   with a soft glow. Swap to <figure class="hero-art plate"> for framed key art. */
-.hero-logo { margin: 0; display: grid; place-items: center; }
-.hero-logo img {
-  display: block;
-  width: min(100%, 520px);
-  height: auto;
-  filter: drop-shadow(0 24px 60px rgba(84, 104, 226, 0.34));
+/* Hero cover: a layered web version of the paper's task overview. The prism
+   disperses light upward and the artifacts of PrismaCoder's tasks float around
+   it on three depth layers: back (blurred, not interactive), mid, and front
+   (tilted towards the prism, labelled, some paired with the code behind them).
+   Markup and geometry come from tools/build_cover.py, which also places the
+   scene around this grid cell (inline style): it spreads under the title
+   column and past the page edge. */
+.hero-content { position: relative; z-index: 1; }
+.cover {
+  position: relative;
+  z-index: 0;
+  margin: 0;
+  aspect-ratio: 600 / 540;
 }
-:root[data-theme="light"] .hero-logo img { filter: drop-shadow(0 18px 40px rgba(60, 72, 160, 0.22)); }
+.cover-scene {
+  position: absolute;
+  container: scene / inline-size;
+  pointer-events: none;
+}
+.cover-burst {
+  position: absolute;
+  aspect-ratio: 1;
+  background: var(--fan);
+  -webkit-mask-image: radial-gradient(closest-side, #000 0%, #000 22%, rgba(0, 0, 0, 0.6) 48%, rgba(0, 0, 0, 0.22) 74%, transparent 97%);
+  mask-image: radial-gradient(closest-side, #000 0%, #000 22%, rgba(0, 0, 0, 0.6) 48%, rgba(0, 0, 0, 0.22) 74%, transparent 97%);
+  filter: blur(10px);
+  opacity: 0.8;
+}
+/* on the dark page the fan is added as light rather than painted on */
+:root:not([data-theme="light"]) .cover-burst { opacity: 0.58; mix-blend-mode: screen; }
+.cover-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+/* input beams: invisible at the outer end, brightest where they meet the prism */
+.cover-beams stop { stop-color: #e6e9ff; }
+.cover-beams .far { stop-opacity: 0; }
+.cover-beams .near { stop-opacity: 0.42; }
+:root[data-theme="light"] .cover-beams stop { stop-color: #6c73b8; }
+:root[data-theme="light"] .cover-beams .near { stop-opacity: 0.26; }
+.cover-code text { font-family: var(--font-mono); font-size: 8px; fill: var(--glow); opacity: 0.36; }
+:root[data-theme="light"] .cover-code text { fill: var(--ink); opacity: 0.28; }
+
+/* depth: each layer drifts against the pointer by its own amount (--mx, --my from main.js) */
+.scene-layer { position: absolute; inset: 0; transition: translate 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.layer-back { translate: calc(var(--mx, 0) * 7px) calc(var(--my, 0) * 5px); }
+.layer-mid { translate: calc(var(--mx, 0) * -6px) calc(var(--my, 0) * -4px); }
+.layer-front { translate: calc(var(--mx, 0) * -15px) calc(var(--my, 0) * -10px); }
+
+.scene-item { position: absolute; }
+.scene-item:hover { z-index: 3; }
+.layer-mid .scene-item, .layer-front .scene-item { pointer-events: auto; }
+.scene-tilt {
+  position: relative;
+  transform: perspective(1100px) rotateY(var(--ry)) rotateX(var(--rx)) rotate(var(--rz));
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.layer-front .scene-tilt:hover { transform: perspective(1100px) translateY(-6px) scale(1.05); }
+.layer-mid .scene-tilt:hover { transform: perspective(1100px) translateY(-4px) scale(1.04); }
+
+.scene-card {
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 20px 38px -20px rgba(22, 26, 70, 0.55),
+    0 4px 10px -6px rgba(22, 26, 70, 0.28);
+}
+.scene-card img { display: block; width: 100%; height: auto; }
+.layer-front .scene-card {
+  box-shadow:
+    0 24px 44px -20px rgba(22, 26, 70, 0.6),
+    0 4px 12px -6px rgba(22, 26, 70, 0.3),
+    0 0 46px -16px var(--band);
+}
+/* browser chrome for rendered pages */
+.scene-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.34cqw;
+  height: 1.5cqw;
+  padding: 0 0.62cqw;
+  background: #eceef5;
+  border-bottom: 1px solid #dde0ea;
+}
+.scene-bar i { width: 0.52cqw; height: 0.52cqw; border-radius: 50%; background: #f0a79c; }
+.scene-bar i:nth-child(2) { background: #f1cf87; }
+.scene-bar i:nth-child(3) { background: #9fd3a6; }
+
+/* back layer: out of focus and out of reach */
+.layer-back .scene-item { opacity: 0.5; filter: blur(1.6px) saturate(0.85); }
+.layer-mid .scene-item { opacity: 0.92; filter: blur(0.35px); transition: filter 0.3s ease, opacity 0.3s ease; }
+.layer-mid .scene-item:hover { opacity: 1; filter: none; }
+:root:not([data-theme="light"]) .layer-back .scene-item { opacity: 0.3; }
+:root:not([data-theme="light"]) .scene-card { border-color: rgba(255, 255, 255, 0.16); filter: brightness(0.94); }
+:root:not([data-theme="light"]) .layer-front .scene-card {
+  box-shadow:
+    0 26px 48px -20px rgba(0, 0, 0, 0.8),
+    0 0 52px -14px var(--band);
+}
+
+.scene-label {
+  position: absolute;
+  left: 0.9cqw;
+  top: 0;
+  translate: 0 -58%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.32em 0.8em 0.32em 0.45em;
+  border-radius: 999px;
+  font-size: 11px;
+  font-size: clamp(9px, 1.22cqw, 12px);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: #1f2340;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid var(--band);
+  box-shadow: 0 8px 18px -10px rgba(22, 26, 70, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.scene-label img { height: 1.45em; width: auto; max-width: 1.9em; object-fit: contain; }
+:root:not([data-theme="light"]) .scene-label { color: #eef0ff; background: rgba(24, 27, 56, 0.82); }
+
+/* code windows: the source of the render beside them, kept a step quieter than
+   the renders (below them where they overlap, no glow, softer ink), and in an
+   editor theme that matches the page */
+.layer-front .scene-item:not(.is-code) { z-index: 1; }
+.layer-front .scene-item:not(.is-code):hover { z-index: 3; }
+.scene-code {
+  overflow: hidden;
+  border-radius: 8px;
+  background: rgba(15, 18, 38, 0.9);
+  border: 1px solid rgba(160, 170, 255, 0.2);
+  box-shadow: 0 18px 36px -22px rgba(10, 12, 40, 0.6);
+  opacity: 0.86;
+}
+.scene-code-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em 0.85em;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-size: clamp(7px, 1.05cqw, 10.5px);
+  color: #aab1d8;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(160, 170, 255, 0.14);
+}
+.scene-code-tab img { height: 1.3em; width: auto; }
+.scene-code pre {
+  margin: 0;
+  padding: 0.65em 0.95em 0.75em;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-size: clamp(6.5px, 1cqw, 10px);
+  line-height: 1.55;
+  color: #c3c8e6;
+  white-space: pre;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, #000 82%, transparent);
+  mask-image: linear-gradient(90deg, #000 82%, transparent);
+}
+.scene-code .tk { color: #ab9cf0; }
+.scene-code .ta, .scene-code .tt { color: #88c4e6; }
+.scene-code .ts { color: #93d2b6; }
+.scene-code .tn { color: #eab893; }
+.scene-code .tc { color: #6f7699; }
+:root[data-theme="light"] .scene-code {
+  background: rgba(250, 251, 255, 0.92);
+  border-color: #e1e4ef;
+  box-shadow: 0 16px 32px -22px rgba(22, 26, 70, 0.45);
+}
+:root[data-theme="light"] .scene-code-tab { color: #6b7194; background: #f1f3f9; border-bottom-color: #e6e9f2; }
+:root[data-theme="light"] .scene-code pre { color: #4b5163; }
+:root[data-theme="light"] .scene-code .tk { color: #6d4fd6; }
+:root[data-theme="light"] .scene-code .ta, :root[data-theme="light"] .scene-code .tt { color: #1d7fa8; }
+:root[data-theme="light"] .scene-code .ts { color: #0f8a6a; }
+:root[data-theme="light"] .scene-code .tn { color: #c2621d; }
+:root[data-theme="light"] .scene-code .tc { color: #9aa0b8; }
+
+.cover-prism {
+  position: absolute;
+  height: auto;
+  filter: drop-shadow(0 18px 40px rgba(84, 96, 226, 0.45));
+}
+:root[data-theme="light"] .cover-prism { filter: drop-shadow(0 16px 30px rgba(60, 72, 160, 0.28)); }
+
+/* the artifacts leave the prism once, on load */
+@media (prefers-reduced-motion: no-preference) {
+  .js .scene-item { animation: scene-in 1.15s cubic-bezier(0.16, 0.84, 0.24, 1) both; animation-delay: calc(180ms + var(--i) * 45ms); }
+  .js .cover-prism { animation: prism-in 0.8s ease-out both; }
+}
+@keyframes scene-in {
+  from { opacity: 0; transform: translate(calc(var(--fx) * 1cqw), calc(var(--fy) * 1cqw)) scale(0.3); }
+}
+@keyframes prism-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+}
+
+/* On a narrow scene the labels stop fitting; the renders stay. */
+@container scene (max-width: 640px) {
+  .scene-label { display: none; }
+}
 
 /* --------------------------------------------------------------------------
    8. Byline band
@@ -567,11 +752,11 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
 }
 /* No underlines in the byline, linked or not — hover colour is the only cue. */
 .authors a { color: inherit; text-decoration: none; }
-.authors a:hover { color: var(--gold-300); }
+.authors a:hover { color: var(--accent-300); }
 .authors .au { white-space: nowrap; }
-.authors .au.eq { color: var(--gold-300); font-weight: 600; }
-.authors .au.eq a:hover { color: var(--gold-200); }
-.authors sup { font-size: 0.64em; color: var(--gold-400); font-weight: 600; margin-left: 1px; }
+.authors .au.eq { color: var(--accent-300); font-weight: 600; }
+.authors .au.eq a:hover { color: var(--accent-200); }
+.authors sup { font-size: 0.64em; color: var(--accent-400); font-weight: 600; margin-left: 1px; }
 
 /* Affiliations: a small mark attached to the left of each name */
 .affils {
@@ -587,7 +772,7 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
   color: var(--text-dim);
 }
 .affils li { display: inline-flex; align-items: center; gap: 9px; }
-.affils sup { color: var(--gold-400); font-weight: 600; font-size: 0.72em; padding-right: 1px; }
+.affils sup { color: var(--accent-400); font-weight: 600; font-size: 0.72em; padding-right: 1px; }
 .affils .mark {
   flex: none;
   width: 28px; height: 28px;
@@ -601,8 +786,8 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
 :root:not([data-theme="light"]) .affils .mark .lt { display: none; }
 :root:not([data-theme="light"]) .affils .mark .dk { display: block; }
 .legend { margin: 16px 0 0; font-size: 13px; color: var(--text-faint); }
-.legend sup { color: var(--gold-400); }
-.eq-key { color: var(--gold-300); font-weight: 600; }
+.legend sup { color: var(--accent-400); }
+.eq-key { color: var(--accent-300); font-weight: 600; }
 
 /* --------------------------------------------------------------------------
    9. Link row
@@ -632,17 +817,13 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
 }
 .btn:active { transform: none; }
 
-.btn-gold {
-  background: linear-gradient(180deg, var(--gold-200), var(--gold-400));
-  border-color: var(--hairline-strong);
-  color: #201502;
+.btn-primary {
+  background: linear-gradient(180deg, #6a71e4, #4c52c4);
+  border-color: rgba(144, 153, 245, 0.55);
+  color: #ffffff;
   font-weight: 650;
 }
-.btn-gold:hover { background: linear-gradient(180deg, var(--gold-100), var(--gold-300)); color: #1a1002; }
-/* The gold ramp inverts on the light theme (100 = darkest), so the button pins
-   its own light golds there and keeps dark text for contrast. */
-:root[data-theme="light"] .btn-gold { background: linear-gradient(180deg, #f0dca2, #cfa54b); color: #201502; }
-:root[data-theme="light"] .btn-gold:hover { background: linear-gradient(180deg, #fbf4d6, #e2c377); color: #1a1002; }
+.btn-primary:hover { background: linear-gradient(180deg, #767de9, #565cce); color: #ffffff; }
 
 /* Parked links: clearly not-yet-live, but still readable. The dashed border
    carries the "not yet" signal, so the label itself keeps normal contrast. */
@@ -654,13 +835,13 @@ h2.section-title { font-size: clamp(28px, 3.6vw, 38px); margin-bottom: 12px; }
   cursor: default;
 }
 .btn.pending:hover { transform: none; color: var(--text); background: var(--chart-track); }
-.btn.btn-gold.pending {
-  color: var(--gold-300);
-  border-color: var(--gold-400);
+.btn.btn-primary.pending {
+  color: var(--accent-300);
+  border-color: var(--accent-400);
   background: var(--chart-track);
   font-weight: 600;
 }
-.btn.btn-gold.pending:hover { color: var(--gold-200); background: var(--chart-track); }
+.btn.btn-primary.pending:hover { color: var(--accent-200); background: var(--chart-track); }
 
 
 /* --------------------------------------------------------------------------
@@ -705,7 +886,7 @@ ol.contribs li::before {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 600;
-  color: var(--gold-300);
+  color: var(--accent-300);
   background: var(--chart-track);
   border: 1px solid var(--hairline);
 }
@@ -715,7 +896,7 @@ ol.contribs a b {
   border-bottom: 1px solid var(--hairline-strong);
   transition: color 0.16s ease;
 }
-ol.contribs a:hover b { color: var(--gold-300); }
+ol.contribs a:hover b { color: var(--accent-300); }
 
 .grid { display: grid; gap: 20px; }
 .grid > * { min-width: 0; }
@@ -731,7 +912,7 @@ ol.contribs a:hover b { color: var(--gold-300); }
   margin-bottom: 14px;
   background: var(--chart-track);
   border: 1px solid var(--hairline);
-  color: var(--gold-300);
+  color: var(--accent-300);
 }
 .feature .ico svg { width: 19px; height: 19px; }
 .feature h3 { font-size: 19px; margin-bottom: 7px; }
@@ -746,7 +927,7 @@ a.card.feature:not(.pending-card):hover { transform: translateY(-2px); border-co
   letter-spacing: 0.11em;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--gold-500);
+  color: var(--accent-500);
   border: 1px dashed var(--hairline-strong);
   border-radius: 6px;
   padding: 3px 8px;
@@ -760,7 +941,7 @@ a.card.feature:not(.pending-card):hover { transform: translateY(-2px); border-co
   border-radius: var(--r);
   background: var(--surface-1b);
   border: 1px solid var(--hairline-cool);
-  border-left: 3px solid var(--gold-500);
+  border-left: 3px solid var(--accent-500);
   font-size: 15.5px;
   color: var(--text-hi);
 }
@@ -769,7 +950,7 @@ a.card.feature:not(.pending-card):hover { transform: translateY(-2px); border-co
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--gold-400);
+  color: var(--accent-400);
   padding-top: 5px;
   flex: none;
 }
@@ -781,7 +962,7 @@ a.card.feature:not(.pending-card):hover { transform: translateY(-2px); border-co
   border-radius: 50%;
   font-family: var(--font-mono);
   font-size: 11.5px; font-weight: 600;
-  color: var(--gold-300);
+  color: var(--accent-300);
   background: var(--chart-track);
   border: 1px solid var(--hairline);
 }
@@ -791,7 +972,7 @@ a.card.feature:not(.pending-card):hover { transform: translateY(-2px); border-co
 .news .eyebrow { margin-bottom: 12px; }
 .news ul { list-style: none; padding: 0; margin: 0; font-size: 15.5px; line-height: 1.9; }
 .news time {
-  color: var(--gold-300);
+  color: var(--accent-300);
   font-family: var(--font-mono);
   font-size: 13px;
   font-weight: 600;
@@ -835,7 +1016,7 @@ a.card.feature:not(.pending-card):hover { transform: translateY(-2px); border-co
 .flow-arrow {
   align-self: center;
   flex: 0 0 auto;
-  color: var(--gold-500);
+  color: var(--accent-500);
   padding: 0 8px;
   display: grid; place-items: center; gap: 3px;
 }
@@ -871,13 +1052,13 @@ table.data thead th {
 }
 table.data thead tr.group th {
   text-align: center;
-  color: var(--gold-400);
+  color: var(--accent-400);
   padding-bottom: 6px;
 }
 table.data thead th.sortable { cursor: pointer; }
-table.data thead th.sortable:hover { color: var(--gold-300); }
+table.data thead th.sortable:hover { color: var(--accent-300); }
 table.data thead th .arrow { opacity: 0.26; margin-left: 5px; font-size: 9px; }
-table.data thead th[aria-sort] .arrow { opacity: 1; color: var(--gold-300); }
+table.data thead th[aria-sort] .arrow { opacity: 1; color: var(--accent-300); }
 table.data th:first-child, table.data td:first-child { text-align: left; padding-left: 16px; }
 table.data td {
   padding: 8px 12px;
@@ -888,9 +1069,9 @@ table.data td {
 table.data tbody tr:last-child td { border-bottom: none; }
 table.data tbody tr { transition: background 0.14s ease; }
 table.data tbody tr:hover { background: var(--chart-track); }
-table.data tbody tr.ours { background: var(--chart-track); box-shadow: inset 3px 0 0 var(--gold-500); }
+table.data tbody tr.ours { background: var(--chart-track); box-shadow: inset 3px 0 0 var(--accent-500); }
 table.data tbody tr.ours:hover { background: var(--surface-1b); }
-table.data td.best { color: var(--gold-300); font-weight: 650; }
+table.data td.best { color: var(--accent-300); font-weight: 650; }
 table.data .rank {
   color: var(--text-faint);
   font-family: var(--font-mono);
@@ -925,7 +1106,7 @@ table.data .rank {
 }
 .tag.closed { color: var(--text-faint); border-color: var(--hairline-cool); }
 .tag.open { color: var(--cyan-400); border-color: var(--hairline-cool); }
-.tag.ours { color: var(--gold-400); border-color: var(--hairline-strong); }
+.tag.ours { color: var(--accent-400); border-color: var(--hairline-strong); }
 
 .cellbar { position: relative; display: inline-block; min-width: 44px; text-align: right; }
 .cellbar i {
@@ -969,12 +1150,11 @@ table.data .rank {
   transition: color 0.16s ease, background 0.16s ease;
   white-space: nowrap;
 }
-.seg button:hover { color: var(--gold-300); }
+.seg button:hover { color: var(--accent-300); }
 .seg button[aria-pressed="true"] {
-  color: #201502;
-  background: linear-gradient(180deg, var(--gold-300), var(--gold-500));
+  color: #ffffff;
+  background: linear-gradient(180deg, #6a71e4, #4c52c4);
 }
-:root[data-theme="light"] .seg button[aria-pressed="true"] { color: #fffaf0; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip {
@@ -992,14 +1172,14 @@ table.data .rank {
 }
 .chip:hover { color: var(--text-hi); border-color: var(--hairline-strong); }
 .chip[aria-pressed="false"] { opacity: 0.4; }
-/* our own models: a soft gold field instead of an "(ours)" suffix */
+/* our own models: a soft accent field instead of an "(ours)" suffix */
 .chip-ours {
-  background: linear-gradient(180deg, rgba(207, 165, 75, 0.20), rgba(207, 165, 75, 0.09));
+  background: linear-gradient(180deg, rgba(144, 153, 245, 0.22), rgba(144, 153, 245, 0.10));
   border-color: var(--hairline-strong);
-  color: var(--gold-200);
+  color: var(--accent-200);
   font-weight: 600;
 }
-.chip-ours:hover { color: var(--gold-100); border-color: var(--gold-400); }
+.chip-ours:hover { color: var(--accent-100); border-color: var(--accent-400); }
 .chip .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
 
 .search {
@@ -1085,7 +1265,7 @@ figcaption { font-size: 13px; color: var(--text-faint); margin-top: 11px; line-h
   appearance: none;
   font-family: inherit;
   font-size: 12px; font-weight: 600;
-  color: var(--gold-300);
+  color: var(--accent-300);
   background: transparent;
   border: 1px solid var(--hairline-strong);
   border-radius: 7px;
@@ -1094,7 +1274,7 @@ figcaption { font-size: 13px; color: var(--text-faint); margin-top: 11px; line-h
   display: inline-flex; align-items: center; gap: 6px;
   transition: all 0.16s ease;
 }
-.copy-btn:hover { background: var(--chart-track); color: var(--gold-200); }
+.copy-btn:hover { background: var(--chart-track); color: var(--accent-200); }
 .copy-btn.done { color: var(--ok); border-color: var(--ok); }
 .bibtex pre {
   margin: 0;
@@ -1123,12 +1303,12 @@ footer.site h2 {
   font-size: 11px;
   letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: var(--gold-400);
+  color: var(--accent-400);
   margin-bottom: 12px;
 }
 footer.site ul { list-style: none; padding: 0; margin: 0; font-size: 14px; line-height: 1.95; }
 footer.site ul a { color: var(--text-dim); }
-footer.site ul a:hover { color: var(--gold-300); }
+footer.site ul a:hover { color: var(--accent-300); }
 footer.site .brand-line {
   display: flex; align-items: center; gap: 10px;
   font-family: var(--font-display);
@@ -1160,6 +1340,12 @@ footer.site .fine a { color: var(--text-dim); }
 /* --------------------------------------------------------------------------
    19. Responsive
    -------------------------------------------------------------------------- */
+/* the tagline's forced break only fits on a wide column; below that, balance the lines */
+@media (max-width: 1380px) {
+  .br-lg { display: none; }
+  .hero .tagline { text-wrap: balance; }
+}
+
 @media (max-width: 1080px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   footer.site .cols { grid-template-columns: 1fr 1fr; }
@@ -1217,5 +1403,5 @@ footer.site .fine a { color: var(--text-dim); }
   .cosmos, #starfield, .nav { display: none !important; }
   body { background: #fff; color: #111; }
   .card, .chart-card { border-color: #ccc; background: #fff; box-shadow: none; }
-  h1, h2, h3, .gilt { color: #111 !important; -webkit-text-fill-color: #111 !important; }
+  h1, h2, h3, .grad-text { color: #111 !important; -webkit-text-fill-color: #111 !important; }
 }
