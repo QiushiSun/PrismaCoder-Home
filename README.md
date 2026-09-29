@@ -25,7 +25,7 @@ public/
   logos/projects/        marks for the "More research" menu
 tools/build_icons.py     regenerates logo.webp and every favicon from public/logo.png
 tools/build_cover.py     regenerates the hero cover (assets + markup)
-tools/cover_src/         sources of the cover renders made for this page, and render.sh
+tools/cover_src/         sources of the cover-only renders, and render.sh
 ```
 
 ## Filling in the template
@@ -54,13 +54,13 @@ PrismaCoder's tasks float around it on three depth layers:
 - front: tilted towards the prism and labelled; two are paired with a code
   window showing the actual source of the render beside it
 
-Renders come from the paper tree (gold renders of benchmark samples in
-`case_studies/`, and the Figure-1 thumbnails in `overview_src/thumbs/` with
-their source files beside them) or from `tools/cover_src/`, which holds the
-sources made for this page: the dashboard and board pages (`webui_dashboard.html`,
-`kanban.html`), the
-rose chart (`make_rose.py` -> `rose.svg`), the 3D surface (`plot3d.py`) and the
-Manim transformer scene (`transformer.py`). Band colours follow the figure. The layers drift
+Renders come from the paper tree or from `tools/cover_src/`. The paper tree
+holds the gold renders of benchmark samples (`case_studies/`) and the Figure-1
+thumbnails with their sources (`overview_src/thumbs/`), including the dashboard,
+the 3D surface and the Manim transformer, which Figure 1 shares with the cover;
+edit those there. `tools/cover_src/` holds the cover-only sources: the board page
+(`kanban.html`) and the rose chart (`make_rose.py` -> `rose.svg`). Band colours
+follow the figure. The layers drift
 against the pointer (off under reduced motion and on touch screens), and on
 load the artifacts leave the prism once.
 
@@ -71,7 +71,7 @@ the icons, and rewrites the markup between the `<!-- cover:start -->` and
 never edit the generated block.
 
 ```bash
-tools/cover_src/render.sh      # Chrome, matplotlib, Manim -> tools/cover_src/renders/ (gitignored)
+tools/cover_src/render.sh      # headless Chrome -> tools/cover_src/renders/ (gitignored)
 python3 tools/build_cover.py   # reads the renders and the paper tree ($PRISMACODER_PAPER)
 ```
 
