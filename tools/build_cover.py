@@ -8,10 +8,10 @@ produce float around it on three depth layers:
          window showing the actual source of the render next to it
 Renders come from the paper tree (gold renders of benchmark samples in
 case_studies/, and the Figure-1 thumbnails in overview_src/thumbs/ with their
-source files beside them; the dashboard, 3D surface and Manim transformer live
-there too, shared with Figure 1) or from tools/cover_src/ (the cover-only board
-and rose chart, rendered by its render.sh). Band colours follow the figure: hue
-by direction from the prism.
+source files beside them; the dashboard, 3D surface, Manim transformer and the
+board page live there too, shared with Figure 1) or from tools/cover_src/renders/,
+which its render.sh fills: the board at the cover's size and the cover-only rose
+chart. Band colours follow the figure: hue by direction from the prism.
 
     python3 tools/build_cover.py
 
@@ -83,7 +83,7 @@ ITEMS = [
     dict(layer="back", slug="icons", src=thumb("icons_set.png"), x=336, y=8, w=118),
     dict(layer="back", slug="flowchart", src=thumb("flowchart_standin.png"), x=742, y=6, w=196),
     dict(layer="back", slug="latex", src=thumb("latex_document.png"), crop=(0.03, 0, 0.97, 0.976),
-         x=22, y=470, w=150),
+         x=90, y=470, w=150),
     dict(layer="back", slug="chem", src=thumb("chem_grid.png"), crop=(0.04, 0, 0.96, 1),
          x=800, y=512, w=140),
     dict(layer="back", slug="table", src=thumb("table_standin.png"), x=0, y=124, w=104),

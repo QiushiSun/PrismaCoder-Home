@@ -7,7 +7,7 @@
   <title>PrismaCoder: Pushing the Boundaries of Open Multimodal Code Intelligence through Decomposed Rubric Synthesis</title>
   <!-- TODO: a one-sentence page description here and in og:/twitter:description. -->
   <meta name="description"
-    content="PrismaCoder: Pushing the Boundaries of Open Multimodal Code Intelligence through Decomposed Rubric Synthesis">
+    content="PrismaCoder: open models and the broadest open dataset for multimodal code intelligence, curated and trained with a rubric synthesized per instruction that serves as both data filter and RL reward.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#02091a">
 
@@ -44,6 +44,9 @@
       d.className += " js";
       var t;
       try { t = localStorage.getItem("prismacoder-theme"); } catch (e) { /* private mode */ }
+      /* ?theme=light|dark overrides for a shared link or a screenshot */
+      var q = /[?&]theme=(light|dark)/.exec(location.search);
+      if (q) t = q[1];
       if (t !== "light" && t !== "dark") {
         t = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
       }
@@ -104,8 +107,8 @@
         -->
         <!-- Section links double as the scroll-spy list (main.js reads them). -->
         <li><a href="#overview">Overview</a></li>
-        <li><a href="#method">Method</a></li>
-        <li><a href="#dataset">Dataset</a></li>
+        <li><a href="#pipeline">PrismaForge</a></li>
+        <li><a href="#data">Data</a></li>
         <li><a href="#results">Results</a></li>
         <li><a href="#analysis">Analysis</a></li>
         <li><a href="#examples">Examples</a></li>
@@ -139,19 +142,55 @@
     <div class="wrap wrap-wide hero-split">
       <div class="hero-content">
         <h1><span class="grad-text">PrismaCoder</span></h1>
-        <p class="tagline">Pushing the Boundaries of Open Multimodal Code Intelligence<br class="br-lg">
+        <p class="tagline">Pushing the Boundaries of Open Multimodal Code Intelligence
           through Decomposed Rubric Synthesis</p>
 
-        <!-- TODO: lede (motivation, two or three sentences).
-        <p class="lede">…</p> -->
+        <p class="lede">Code intelligence now reaches past source text into what programs render: charts,
+          web pages, diagrams, documents and animations. Open models have covered this space one corner at
+          a time. PrismaCoder covers it with one primitive, a rubric synthesized per instruction, that
+          filters the training data and then rewards the policy.</p>
 
-        <!-- TODO: contribution bullets, one per artifact; bold only the lead phrase.
         <ul class="bullets">
           <li>
-            <span class="b-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">…</svg></span>
-            <span><b>Lead phrase</b> rest of the bullet</span>
+            <span class="b-ico" aria-hidden="true">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 3 21 7.5 12 12 3 7.5 12 3Z" stroke-linejoin="round" />
+                <path d="M3 12.5 12 17l9-4.5M3 16.5 12 21l9-4.5" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span><b>PrismaForge</b>: per-instruction rubrics with separate code-level and visual-level
+              checks, serving as data filter and RL reward</span>
           </li>
-        </ul> -->
+          <li>
+            <span class="b-ico" aria-hidden="true">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <ellipse cx="12" cy="6" rx="8" ry="3" />
+                <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" />
+              </svg>
+            </span>
+            <span><b>PrismaCoder-2M</b>: the broadest and largest open dataset for multimodal code
+              intelligence, from plots and web pages to notation and animation</span>
+          </li>
+          <li>
+            <span class="b-ico" aria-hidden="true">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 3l7.5 4.2v9.6L12 21l-7.5-4.2V7.2L12 3Z" stroke-linejoin="round" />
+                <path d="M12 12v9M12 12 4.5 7.8M12 12l7.5-4.2" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span><b>PrismaCoder-9B and 35B</b>: lead open models by a wide margin and match or surpass
+              proprietary systems on charts, front-end pages and semi-structured documents</span>
+          </li>
+          <li>
+            <span class="b-ico" aria-hidden="true">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 19V9M10 19V5M16 19v-6M22 19H2" stroke-linecap="round" />
+              </svg>
+            </span>
+            <span><b>Analysis</b>: rubric filtering beats direct judging, the recipe transfers across
+              backbones, rubric scores align with human judgment</span>
+          </li>
+        </ul>
 
         <!-- Release links. Each is parked (class "pending", no href) until its
              artifact is public: then drop "pending" and add the href. -->
@@ -237,8 +276,8 @@
             <div class="scene-item" style="left:84.667%;top:17.667%;width:13.778%;--fx:-30.44;--fy:25.00;--i:15;--band:#82c3c5"><div class="scene-tilt" style="--ry:0deg;--rx:0deg;--rz:0deg"><div class="scene-card"><img src="public/cover/mathfig.webp" alt="" width="260" height="174" decoding="async"></div></div></div>
             <div class="scene-item" style="left:95.333%;top:42.000%;width:13.333%;--fx:-40.89;--fy:11.43;--i:16;--band:#86b3d9"><div class="scene-tilt" style="--ry:0deg;--rx:0deg;--rz:0deg"><div class="scene-card"><img src="public/cover/bubbles.webp" alt="" width="252" height="74" decoding="async"></div></div></div>
             <div class="scene-item" style="left:37.333%;top:1.333%;width:13.111%;--fx:17.22;--fy:37.69;--i:18;--band:#d2c47c"><div class="scene-tilt" style="--ry:0deg;--rx:0deg;--rz:0deg"><div class="scene-card"><img src="public/cover/icons.webp" alt="" width="248" height="106" decoding="async"></div></div></div>
-            <div class="scene-item" style="left:72.444%;top:0.000%;width:9.556%;--fx:-16.11;--fy:39.01;--i:19;--band:#99ca99"><div class="scene-tilt" style="--ry:0deg;--rx:0deg;--rz:0deg"><div class="scene-card"><img src="public/cover/lines.webp" alt="" width="181" height="90" decoding="async"></div></div></div>
-            <div class="scene-item" style="left:2.444%;top:78.333%;width:16.667%;--fx:50.33;--fy:-15.89;--i:21;--band:#d98c8c"><div class="scene-tilt" style="--ry:0deg;--rx:0deg;--rz:0deg"><div class="scene-card"><img src="public/cover/latex.webp" alt="" width="315" height="191" decoding="async"></div></div></div>
+            <div class="scene-item" style="left:10.000%;top:78.333%;width:16.667%;--fx:42.78;--fy:-15.89;--i:19;--band:#d98c8c"><div class="scene-tilt" style="--ry:0deg;--rx:0deg;--rz:0deg"><div class="scene-card"><img src="public/cover/latex.webp" alt="" width="315" height="191" decoding="async"></div></div></div>
+            <div class="scene-item" style="left:72.444%;top:0.000%;width:9.556%;--fx:-16.11;--fy:39.01;--i:20;--band:#99ca99"><div class="scene-tilt" style="--ry:0deg;--rx:0deg;--rz:0deg"><div class="scene-card"><img src="public/cover/lines.webp" alt="" width="181" height="90" decoding="async"></div></div></div>
             <div class="scene-item" style="left:82.444%;top:1.000%;width:21.778%;--fx:-32.22;--fy:38.15;--i:22;--band:#86c7b5"><div class="scene-tilt" style="--ry:0deg;--rx:0deg;--rz:0deg"><div class="scene-card"><img src="public/cover/flowchart.webp" alt="" width="412" height="97" decoding="async"></div></div></div>
             <div class="scene-item" style="left:21.778%;top:1.000%;width:13.778%;--fx:32.44;--fy:36.34;--i:23;--band:#dcb77e"><div class="scene-tilt" style="--ry:0deg;--rx:0deg;--rz:0deg"><div class="scene-card"><img src="public/cover/surface.webp" alt="" width="260" height="165" decoding="async"></div></div></div>
             <div class="scene-item" style="left:4.000%;top:6.667%;width:24.444%;--fx:44.89;--fy:33.05;--i:24;--band:#deb17f"><div class="scene-tilt" style="--ry:0deg;--rx:0deg;--rz:0deg"><div class="scene-card"><img src="public/cover/score.webp" alt="" width="462" height="147" decoding="async"></div></div></div>
@@ -250,7 +289,7 @@
             <div class="scene-item" style="left:92.889%;top:68.333%;width:11.111%;--fx:-37.33;--fy:-8.25;--i:11;--band:#c090c0"><div class="scene-tilt" style="--ry:-8deg;--rx:0deg;--rz:-2deg"><div class="scene-card"><img src="public/cover/geometry.webp" alt="" width="210" height="154" decoding="async"></div></div></div>
             <div class="scene-item" style="left:11.556%;top:58.333%;width:17.556%;--fx:40.78;--fy:-1.89;--i:14;--band:#dc9388"><div class="scene-tilt" style="--ry:10deg;--rx:0deg;--rz:1deg"><div class="scene-card is-window"><span class="scene-bar"><i></i><i></i><i></i></span><img src="public/cover/kanban.webp" alt="" width="332" height="166" decoding="async"></div></div></div>
             <div class="scene-item" style="left:21.111%;top:18.333%;width:15.556%;--fx:32.22;--fy:24.69;--i:17;--band:#deb17f"><div class="scene-tilt" style="--ry:8deg;--rx:0deg;--rz:-2deg"><div class="scene-card"><img src="public/cover/sequence.webp" alt="" width="294" height="169" decoding="async"></div></div></div>
-            <div class="scene-item" style="left:88.000%;top:10.333%;width:15.556%;--fx:-34.67;--fy:30.13;--i:20;--band:#82c4c2"><div class="scene-tilt" style="--ry:-8deg;--rx:0deg;--rz:2deg"><div class="scene-card"><img src="public/cover/theorem.webp" alt="" width="294" height="165" decoding="async"></div></div></div>
+            <div class="scene-item" style="left:88.000%;top:10.333%;width:15.556%;--fx:-34.67;--fy:30.13;--i:21;--band:#82c4c2"><div class="scene-tilt" style="--ry:-8deg;--rx:0deg;--rz:2deg"><div class="scene-card"><img src="public/cover/theorem.webp" alt="" width="294" height="165" decoding="async"></div></div></div>
           </div>
           <picture>
             <source srcset="public/logo.webp" type="image/webp">
@@ -289,9 +328,10 @@ attn.set_fill(<span class="ts">&quot;#1d1d27&quot;</span>, <span class="tn">1</s
   <!-- ==================================================================== -->
   <!-- Byline                                                                -->
   <!-- ==================================================================== -->
-  <section class="byline">
+  <!-- Author list: filled when the paper is on arXiv; the "empty" class hides the band until then. -->
+  <section class="byline empty">
     <div class="wrap wrap-wide">
-      <div class="panel">
+      <div class="byline-panel">
         <!-- TODO: authors and affiliations. "au eq" colors an equal-contribution
              author; each crest is a 96x96 transparent PNG pair (light / dark) in
              public/affil/.
@@ -313,7 +353,7 @@ attn.set_fill(<span class="ts">&quot;#1d1d27&quot;</span>, <span class="tn">1</s
     <!-- ================================================================== -->
     <!-- News                                                                -->
     <!-- ================================================================== -->
-    <section class="band-tight" id="news">
+    <section class="band-tight news-band empty" id="news">
       <div class="wrap">
         <div class="card news rise">
           <span class="eyebrow">News</span>
@@ -327,54 +367,173 @@ attn.set_fill(<span class="ts">&quot;#1d1d27&quot;</span>, <span class="tn">1</s
 
     <!-- ================================================================== -->
     <!-- Overview                                                            -->
-    <!-- Each section below is an empty slot: an eyebrow, a commented title  -->
-    <!-- and dashed placeholder blocks. Replace a block and drop its "slot"   -->
-    <!-- class when the content lands.                                       -->
     <!-- ================================================================== -->
-    <section class="band-tight" id="overview">
+    <section class="sec" id="overview" style="--hue: 114, 122, 227">
       <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Overview</span>
-          <!-- <h2 class="section-title">… <span class="grad-text">…</span></h2> -->
+        <div class="sec-head">
+          <span class="sec-index">01 Overview</span>
+          <h2 class="sec-title">Fine-grained <i>rubrics</i> for visual coding</h2>
+          <p class="sec-sub">Public visual-coding data has been curated with a single score per sample, which
+            says little about what went wrong, or with a verifier written for one task, which does not carry
+            to the next. PrismaForge replaces both with a rubric synthesized for each instruction: a short
+            list of weighted checks, split between the code and its render, that filters the training data
+            and then rewards the policy.</p>
         </div>
-        <!-- motivation + numbered contributions (ol.contribs) -->
-        <div class="card abstract slot rise"></div>
-        <!-- four feature cards linking to the sections below -->
-        <div class="grid grid-4 rise" style="margin-top:22px">
-          <div class="card feature slot short"></div>
-          <div class="card feature slot short"></div>
-          <div class="card feature slot short"></div>
-          <div class="card feature slot short"></div>
+
+        <div class="trio rise">
+          <div style="--c: #9a96d6">
+            <h3><a href="#pipeline">Decomposed rubric synthesis</a></h3>
+            <p>Domain-level checks plus instruction-specific requirements, sized to the task's difficulty,
+              scored on the program and on its render. The same rubric filters the data and rewards the
+              policy.</p>
+          </div>
+          <div style="--c: #82c6bc">
+            <h3><a href="#data">The broadest open dataset</a></h3>
+            <p>PrismaCoder-2M spans text-centric and vision-centric tasks, from plots and web pages to
+              notation, documents and animation, each sample executed, rendered and rubric-checked.</p>
+          </div>
+          <div style="--c: #dfae7f">
+            <h3><a href="#results">Open models that rival proprietary systems</a></h3>
+            <p>PrismaCoder-9B and 35B lead open models by a wide margin and match or surpass proprietary
+              systems on charts, front-end pages and semi-structured documents.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ================================================================== -->
-    <!-- Method                                                              -->
+    <!-- PrismaForge                                                         -->
     <!-- ================================================================== -->
-    <section class="band" id="method">
+    <section class="sec" id="pipeline" style="--hue: 154, 126, 230">
       <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Method</span>
-          <!-- <h2 class="section-title">…</h2>
-          <p class="section-sub">…</p> -->
+        <div class="sec-head">
+          <span class="sec-index">02 PrismaForge</span>
+          <h2 class="sec-title">One rubric, <i>two uses</i></h2>
+          <p class="sec-sub">Walk a sample through the pipeline: the map follows the paper's pipeline figure, and the
+            panel shows a real Web UI task, its rubric, its scores and where the thresholds send it.</p>
         </div>
-        <div class="card chart-card slot rise"></div>
+
+        <div class="split">
+          <aside class="aside">
+            <p class="lead">A rubric is a set of yes/no checks with weights, written for one instruction.</p>
+            <p>Half of its items are shared across the domain (a plot runs without error, axes and legend
+              are shown); the rest are specific to the sample (two bars, teal). Code criteria are checked
+              on the program, visual criteria on the render, and the two scores are kept apart before they
+              are combined.</p>
+            <p>The same rubric then does both jobs: it decides which synthesized samples enter
+              PrismaCoder-2M, and it scores every rollout during reinforcement learning.</p>
+            <ol class="forge-steps">
+              <li>A seed becomes an instruction</li>
+              <li>A rubric is written for it</li>
+              <li>A candidate is generated and executed</li>
+              <li>The judge scores code and render</li>
+              <li>Routing by two thresholds</li>
+              <li>The policy rolls out</li>
+              <li>The same rubric scores each rollout</li>
+              <li>Rollouts are compared in their group</li>
+            </ol>
+          </aside>
+
+          <div class="stage forge rise" id="forge" tabindex="0" aria-label="PrismaForge walkthrough">
+            <div class="forge-map"></div>
+            <div class="forge-controls">
+              <button class="dctl forge-prev" type="button" aria-label="Previous step">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+              <button class="dctl dctl-play forge-play" type="button" aria-pressed="false" aria-label="Play the walkthrough">
+                <svg class="ic-play" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4c0 .5.55.8.97.53l8-5.2a.63.63 0 0 0 0-1.06l-8-5.2a.63.63 0 0 0-.97.53Z" /></svg>
+                <svg class="ic-pause" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5h2.6v11H4v-11Zm5.4 0H12v11H9.4v-11Z" /></svg>
+              </button>
+              <button class="dctl forge-next" type="button" aria-label="Next step">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 3 5 5-5 5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+              <ol class="forge-dots"></ol>
+              <span class="forge-count" aria-hidden="true">1 / 8</span>
+            </div>
+            <div class="forge-panel"></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ================================================================== -->
-    <!-- Dataset                                                             -->
+    <!-- Data                                                                -->
     <!-- ================================================================== -->
-    <section class="band" id="dataset">
+    <section class="sec" id="data" style="--hue: 130, 198, 188">
       <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Dataset</span>
-          <!-- <h2 class="section-title">…</h2> -->
+        <div class="sec-head">
+          <span class="sec-index">03 PrismaCoder-2M</span>
+          <h2 class="sec-title">The broadest open <i>visual-coding</i> dataset</h2>
+          <p class="sec-sub">Four kinds of seeds become self-contained tasks; every candidate is executed by its
+            format's gatekeeper and gated by rubric score. The result spans text-centric and vision-centric
+            tasks in ten languages, about two million samples in all.</p>
         </div>
-        <div class="grid grid-2 rise">
-          <div class="card chart-card slot"></div>
-          <div class="card chart-card slot"></div>
+
+        <ul class="langs rise">
+            <li><img src="public/lang/python.png" alt=""><span>Python</span></li>
+            <li><img src="public/lang/html3.png" alt=""><span>HTML / CSS</span></li>
+            <li><img src="public/lang/js.png" alt=""><span>JavaScript</span></li>
+            <li><img src="public/lang/svg.png" alt=""><span>SVG</span></li>
+            <li><img src="public/lang/latex_bird.png" alt=""><span>LaTeX</span></li>
+            <li><img src="public/lang/mermaid.png" alt=""><span>Mermaid</span></li>
+            <li><img src="public/lang/vegalite.png" alt=""><span>Vega-Lite</span></li>
+            <li><img src="public/lang/lilypond.png" alt=""><span>LilyPond</span></li>
+            <li><img src="public/lang/asymptote.png" alt=""><span>Asymptote</span></li>
+            <li><img src="public/lang/chemdraw.png" alt=""><span>Chemical structures</span></li>
+        </ul>
+
+        <div class="panel fam-wall rise" style="margin-top: 26px">
+          <div class="fam-col">
+            <h3 class="fam-group" style="--g: #da8a9c">Vision-centric <small>from an image: a chart to reproduce, a page to edit</small></h3>
+            <ul class="fams">
+              <li class="fam"><span class="fam-ico"><img src="public/lang/html3.png" alt=""></span><span class="fam-name">WebUI Generation</span><span class="fam-bar"><i style="width:100.0%"></i></span><span class="fam-n">357.1K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/python.png" alt=""><img src="public/lang/matplotlib.png" alt=""></span><span class="fam-name">Chart-to-Code</span><span class="fam-bar"><i style="width:55.1%"></i></span><span class="fam-n">196.5K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/svg.png" alt=""></span><span class="fam-name">Image-to-SVG</span><span class="fam-bar"><i style="width:50.6%"></i></span><span class="fam-n">181.0K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/html_css.png" alt=""></span><span class="fam-name">WebUI Editing</span><span class="fam-bar"><i style="width:48.9%"></i></span><span class="fam-n">175.0K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/js.png" alt=""><img src="public/lang/html3.png" alt=""></span><span class="fam-name">Demo / Artifacts</span><span class="fam-bar"><i style="width:45.5%"></i></span><span class="fam-n">163.3K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/chemdraw.png" alt=""></span><span class="fam-name">Chemical Structures</span><span class="fam-bar"><i style="width:30.3%"></i></span><span class="fam-n">108.0K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/js.png" alt=""></span><span class="fam-name">Interactive Artifacts</span><span class="fam-bar"><i style="width:2.8%"></i></span><span class="fam-n">9.1K</span></li>
+            </ul>
+          </div>
+          <div class="fam-col">
+            <h3 class="fam-group" style="--g: #8fa8c8">Text-centric <small>from a description</small></h3>
+            <ul class="fams">
+              <li class="fam"><span class="fam-ico"><img src="public/lang/python.png" alt=""><img src="public/lang/vegalite.png" alt=""></span><span class="fam-name">Chart Generation</span><span class="fam-bar"><i style="width:50.6%"></i></span><span class="fam-n">181.1K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/js.png" alt=""><img src="public/lang/html3.png" alt=""></span><span class="fam-name">Demo / Artifacts</span><span class="fam-bar"><i style="width:45.5%"></i></span><span class="fam-n">163.0K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/html3.png" alt=""></span><span class="fam-name">Text-to-WebUI</span><span class="fam-bar"><i style="width:37.6%"></i></span><span class="fam-n">135.2K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/latex_bird.png" alt=""></span><span class="fam-name">LaTeX</span><span class="fam-bar"><i style="width:37.1%"></i></span><span class="fam-n">133.1K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/svg.png" alt=""></span><span class="fam-name">SVG Generation</span><span class="fam-bar"><i style="width:15.2%"></i></span><span class="fam-n">53.3K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/manim.png" alt=""></span><span class="fam-name">Animation (Manim)</span><span class="fam-bar"><i style="width:10.1%"></i></span><span class="fam-n">35.9K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/js.png" alt=""></span><span class="fam-name">JavaScript</span><span class="fam-bar"><i style="width:7.9%"></i></span><span class="fam-n">28.5K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/mermaid.png" alt=""></span><span class="fam-name">Mermaid</span><span class="fam-bar"><i style="width:6.2%"></i></span><span class="fam-n">22.7K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/lilypond.png" alt=""></span><span class="fam-name">LilyPond</span><span class="fam-bar"><i style="width:6.2%"></i></span><span class="fam-n">21.9K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/vegalite.png" alt=""></span><span class="fam-name">Vega-Lite</span><span class="fam-bar"><i style="width:5.6%"></i></span><span class="fam-n">20.0K</span></li>
+              <li class="fam"><span class="fam-ico"><img src="public/lang/asymptote.png" alt=""></span><span class="fam-name">Asymptote</span><span class="fam-bar"><i style="width:5.6%"></i></span><span class="fam-n">19.4K</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="seeds rise">
+          <div>
+            <h3>Visualization fundamentals</h3>
+            <p>Plotting datasets in Python, SVG, Mermaid and Vega-Lite: mapping data to axes and marks,
+              composing legends and layered plots.</p>
+          </div>
+          <div>
+            <h3>Scientific artifacts</h3>
+            <p>Plotting code from GitHub repositories and figures from arXiv papers, split into self-contained
+              units by an AST pass.</p>
+          </div>
+          <div>
+            <h3>Front-end layout and interaction</h3>
+            <p>Pages from WebCode2M and MCD for layout; interactive demos adapted from JanusCoder or rewritten
+              from WebSight, MMMG and ProImageBench prompts for behavior.</p>
+          </div>
+          <div>
+            <h3>Symbolic notation</h3>
+            <p>Molecules seeded from PubChem; LaTeX, Asymptote and LilyPond programs that must compile; Manim
+              scenes from the 3Blue1Brown video code.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -382,31 +541,102 @@ attn.set_fill(<span class="ts">&quot;#1d1d27&quot;</span>, <span class="tn">1</s
     <!-- ================================================================== -->
     <!-- Results                                                             -->
     <!-- ================================================================== -->
-    <section class="band" id="results">
-      <div class="wrap wrap-wide">
-        <div class="section-head">
-          <span class="eyebrow">Results</span>
-          <!-- <h2 class="section-title">…</h2> -->
+    <section class="sec" id="results" style="--hue: 90, 167, 224">
+      <div class="wrap">
+        <div class="sec-head">
+          <span class="sec-index">04 Results</span>
+          <h2 class="sec-title">Open models that <i>rival</i> proprietary systems</h2>
+          <p class="sec-sub">One headline metric per benchmark. The filled shapes are PrismaCoder-9B and 35B, the
+            dashed outline is the strongest open baseline on each axis, and the gold outline is one proprietary
+            model, chosen in the legend. The full tables sit below.</p>
         </div>
-        <!-- results table: .table-shell > .table-scroll > table.data; mark our
-             rows with tr.ours, best cells with td.best -->
-        <div class="card chart-card slot rise"></div>
+
+        <div class="stage rise" id="results-stage">
+          <div class="res-head">
+            <div class="seg" role="group" aria-label="Benchmark lens">
+              <button type="button" data-lens="vision" aria-pressed="true">Vision-centric</button>
+              <button type="button" data-lens="text" aria-pressed="false">Text-centric</button>
+            </div>
+            <ul class="res-legend">
+              <li><i class="k-open"></i>best open baseline</li>
+              <li><i class="k-9b"></i>PrismaCoder-9B</li>
+              <li><i class="k-35b"></i>PrismaCoder-35B</li>
+              <li><i class="k-prop"></i><label class="res-prop-label">proprietary <select class="res-prop" aria-label="Proprietary model"></select></label></li>
+            </ul>
+          </div>
+          <div class="res-body">
+            <div class="res-chart"></div>
+            <div class="res-notes">
+              <p class="res-take" data-lens-text="vision">PrismaCoder clears the open baselines on every axis
+                but image-to-SVG, where VinciCoder leads. Against Claude Opus 4.6, PrismaCoder-35B is ahead on
+                chart reproduction, front-end pages, image-to-SVG and chemical structures; interactive science
+                is the one axis where the proprietary model keeps a wide lead.</p>
+              <p class="res-take" data-lens-text="text" hidden>PrismaCoder-35B leads the open models on four of
+                the five text-centric benchmarks, with text-to-SVG staying with Qwen3.5-35B. Claude Opus 4.6
+                stays ahead on every text-centric axis; the gap is smallest on long-tail plotting and
+                text-to-SVG and widest on artifacts and pandas plotting.</p>
+            </div>
+          </div>
+          <div class="res-tip" aria-hidden="true"></div>
+          <details class="fold">
+            <summary>Full table</summary>
+            <div class="table-shell"><div class="table-scroll res-table"></div></div>
+            <p class="fold-note">Best / second among open models. Lower is better where marked ↓.</p>
+          </details>
+        </div>
+
+        <p class="res-settings rise">PrismaCoder-9B and PrismaCoder-35B-A3B are post-trained from Qwen3.5-9B and
+          Qwen3.5-35B-A3B. Data synthesis used frontier models: Claude Opus 4.6 for curation, Gemini 3 Pro for
+          rubric generation, Gemini 3 Flash as the judge for gating and RL. Evaluation follows each
+          benchmark's official protocol, with its designated judge where one is specified, and reports
+          deterministic metrics alongside judge scores.</p>
       </div>
     </section>
 
     <!-- ================================================================== -->
     <!-- Analysis                                                            -->
     <!-- ================================================================== -->
-    <section class="band" id="analysis">
+    <section class="sec" id="analysis" style="--hue: 223, 174, 127">
       <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Analysis</span>
-          <!-- <h2 class="section-title">…</h2> -->
+        <div class="sec-head">
+          <span class="sec-index">05 Analysis</span>
+          <h2 class="sec-title">What the rubric <i>changes</i></h2>
+          <p class="sec-sub">Three checks on the primitive itself: as a filter, as a recipe on other backbones,
+            and against human judgment.</p>
         </div>
-        <!-- findings: .takeaway blocks (<span class="k">01</span><p>…</p>) -->
-        <div class="grid grid-2 rise">
-          <div class="card chart-card slot"></div>
-          <div class="card chart-card slot"></div>
+
+        <div class="an-block rise">
+          <div class="an-text">
+            <h3>Rubric filtering beats direct judging</h3>
+            <p>Qwen3.5-9B is fine-tuned on two equal-sized subsets of the same pool. One subset is kept by a
+              single holistic score per sample and the other by the PrismaForge rubric. The rubric-filtered
+              model scores higher on every benchmark, by 24 points on Vega-Lite, and since the subsets are the
+              same size the gap comes from which samples each judge keeps.</p>
+            <ul class="an-legend"><li><i class="k-direct"></i>direct judge</li><li><i class="k-rubric"></i>PrismaForge rubric</li></ul>
+          </div>
+          <div class="an-fig" id="chart-filter"></div>
+        </div>
+
+        <div class="an-block rise">
+          <div class="an-text">
+            <h3>The recipe carries to other backbones</h3>
+            <p>The same data and method applied to Gemma-4-31B-it and Qwen3-VL-30B-A3B-Instruct, on Python
+              plotting and HTML. On both, every metric ends above the base model and RL adds to SFT on every
+              one; SFT carries most of the ChartMimic gain, RL most of the HTML gains.</p>
+            <div class="seg an-seg" id="backbone-seg" role="group" aria-label="Backbone"></div>
+            <ul class="an-legend"><li><i class="k-sft"></i>SFT gain over base</li><li><i class="k-rl"></i>RL gain over SFT</li></ul>
+          </div>
+          <div class="an-fig" id="chart-backbone"></div>
+        </div>
+
+        <div class="an-block rise">
+          <div class="an-text">
+            <h3>Rubric scores track human judgment</h3>
+            <p>On 100 training samples rated by annotators, three proprietary judges agree with humans far
+              more closely through the rubric than through a direct score, both in absolute level and in how
+              they order the samples.</p>
+          </div>
+          <div class="an-fig" id="chart-human"></div>
         </div>
       </div>
     </section>
@@ -414,24 +644,40 @@ attn.set_fill(<span class="ts">&quot;#1d1d27&quot;</span>, <span class="tn">1</s
     <!-- ================================================================== -->
     <!-- Examples                                                            -->
     <!-- ================================================================== -->
-    <section class="band" id="examples">
+    <section class="sec" id="examples" style="--hue: 196, 143, 190">
       <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Examples</span>
-          <!-- <h2 class="section-title">…</h2> -->
+        <div class="sec-head">
+          <span class="sec-index">06 Examples</span>
+          <h2 class="sec-title">Gold beside the <i>model</i>, task by task</h2>
+          <p class="sec-sub">Benchmark samples with the gold render next to the base model, the SFT-only model
+            and PrismaCoder.</p>
         </div>
-        <div class="card chart-card slot rise"></div>
+        <div class="stage rise case-stage" id="cases" tabindex="0" aria-label="Case viewer">
+          <aside class="case-side">
+            <ol class="case-list" role="group" aria-label="Cases"></ol>
+            <div class="case-nav">
+              <button class="dctl case-prev" type="button" aria-label="Previous case">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+              <span class="case-count" aria-hidden="true">1 / 10</span>
+              <button class="dctl case-next" type="button" aria-label="Next case">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 3 5 5-5 5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              </button>
+            </div>
+          </aside>
+          <div class="case-body"></div>
+        </div>
       </div>
     </section>
 
     <!-- ================================================================== -->
     <!-- Resources                                                           -->
     <!-- ================================================================== -->
-    <section class="band" id="resources">
+    <section class="sec" id="resources" style="--hue: 114, 122, 227">
       <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Resources</span>
-          <!-- <h2 class="section-title">…</h2> -->
+        <div class="sec-head">
+          <span class="sec-index">07 Resources</span>
+          <h2 class="sec-title">Open <i>models</i>, data and code</h2>
         </div>
         <!-- Parked like the hero buttons: add the href and drop "pending-card". -->
         <div class="grid grid-4 rise">
@@ -443,6 +689,7 @@ attn.set_fill(<span class="ts">&quot;#1d1d27&quot;</span>, <span class="tn">1</s
               </svg>
             </div>
             <h3>Paper</h3>
+            <p>The technical report, with the rubric prompts, data sources and per-benchmark tables.</p>
           </a>
           <a class="card feature pending-card" data-link="code">
             <div class="ico">
@@ -451,6 +698,7 @@ attn.set_fill(<span class="ts">&quot;#1d1d27&quot;</span>, <span class="tn">1</s
               </svg>
             </div>
             <h3>Code</h3>
+            <p>PrismaForge: rubric synthesis, the per-format gatekeepers, gating and the RL reward.</p>
           </a>
           <a class="card feature pending-card" data-link="dataset">
             <div class="ico">
@@ -459,7 +707,8 @@ attn.set_fill(<span class="ts">&quot;#1d1d27&quot;</span>, <span class="tn">1</s
                 <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" />
               </svg>
             </div>
-            <h3>Dataset</h3>
+            <h3>PrismaCoder-2M</h3>
+            <p>The curated corpus, with each sample's rubric and scores.</p>
           </a>
           <a class="card feature pending-card" data-link="models">
             <div class="ico">
@@ -468,7 +717,8 @@ attn.set_fill(<span class="ts">&quot;#1d1d27&quot;</span>, <span class="tn">1</s
                 <path d="M12 12v9M12 12 4.5 7.8M12 12l7.5-4.2" stroke-linejoin="round" />
               </svg>
             </div>
-            <h3>Models</h3>
+            <h3>PrismaCoder-9B / 35B</h3>
+            <p>Open-weight checkpoints, post-trained from Qwen3.5-9B and Qwen3.5-35B-A3B.</p>
           </a>
         </div>
       </div>
@@ -477,11 +727,10 @@ attn.set_fill(<span class="ts">&quot;#1d1d27&quot;</span>, <span class="tn">1</s
     <!-- ================================================================== -->
     <!-- BibTeX                                                              -->
     <!-- ================================================================== -->
-    <section class="band-tight" id="cite">
+    <section class="sec" id="cite" style="--hue: 114, 122, 227; padding-top: 0">
       <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Citation</span>
-          <h2 class="section-title">BibTeX</h2>
+        <div class="sec-head" style="margin-bottom: 20px">
+          <span class="sec-index">Citation</span>
         </div>
         <!-- TODO: full author list and the arXiv id once the paper is public. -->
         <div class="bibtex rise">
@@ -518,15 +767,17 @@ attn.set_fill(<span class="ts">&quot;#1d1d27&quot;</span>, <span class="tn">1</s
             <img src="public/favicon-512.png" alt="">
             <span>PrismaCoder</span>
           </div>
-          <!-- TODO: one-line project blurb.
-          <p style="font-size:14.5px;color:var(--text-dim);max-width:380px">…</p> -->
+          <p style="font-size:14.5px;color:var(--text-dim);max-width:380px">
+            Open models and the broadest open dataset for multimodal code intelligence, built on one
+            synthesized rubric per instruction.
+          </p>
         </div>
         <div>
           <h2>Project</h2>
           <ul>
             <li><a href="#overview">Overview</a></li>
-            <li><a href="#method">Method</a></li>
-            <li><a href="#dataset">Dataset</a></li>
+            <li><a href="#pipeline">PrismaForge</a></li>
+            <li><a href="#data">Data</a></li>
             <li><a href="#results">Results</a></li>
             <li><a href="#analysis">Analysis</a></li>
             <li><a href="#examples">Examples</a></li>
@@ -551,6 +802,12 @@ attn.set_fill(<span class="ts">&quot;#1d1d27&quot;</span>, <span class="tn">1</s
     </div>
   </footer>
 
+  <script src="static/js/prismacoder-data.js"></script>
+  <script src="static/js/forge-icons.js"></script>
+  <script src="static/js/forge.js"></script>
+  <script src="static/js/results.js"></script>
+  <script src="static/js/analysis.js"></script>
+  <script src="static/js/cases.js"></script>
   <script src="static/js/main.js"></script>
 </body>
 

@@ -17,31 +17,47 @@ index.html               the page
 404.html                 not-found page
 static/css/main.css      design system + all page styles
 static/js/main.js        theme toggle, starfield, nav, reveal-on-scroll, BibTeX copy
+static/js/prismacoder-data.js  every number and quoted item on the page, with sources
+static/js/forge.js       PrismaForge walkthrough (#forge)
+static/js/results.js     results range chart and folded tables (#results-stage)
+static/js/analysis.js    the three analysis charts
+static/js/cases.js       case viewer (#cases)
 public/
   logo.png / logo.webp   the prism mark (hero cover, nav, favicons)
   favicon*.png .ico      derived from logo.png
   apple-touch-icon.png   180x180, on the dark background
   cover/                 hero-cover card thumbnails and language icons
+  forge/                 pipeline icons and the Appendix C example pages
+  lang/                  language and format icons (data section)
+  cases/                 case-study renders, 720 px wide
   logos/projects/        marks for the "More research" menu
 tools/build_icons.py     regenerates logo.webp and every favicon from public/logo.png
 tools/build_cover.py     regenerates the hero cover (assets + markup)
-tools/cover_src/         sources of the cover-only renders, and render.sh
+tools/cover_src/         the cover-only rose chart source, and render.sh
 ```
 
-## Filling in the template
+## Page data
 
-The page is a skeleton carried over from the OSReward page: the hero carries the
-title, every other section is an empty slot.
+`static/js/prismacoder-data.js` holds every number and quoted item on the page:
+the PrismaForge walkthrough (Figure 2's map and Appendix C's worked example),
+the two results tables, the three analysis series and the case studies. Each
+block notes its source in the paper. Update there, never in the HTML. The
+sections read it through `forge.js`, `results.js`, `analysis.js` and `cases.js`,
+each a self-contained component with no dependencies.
 
-- **Sections.** Each one has an eyebrow, a commented `h2.section-title`, and
-  dashed placeholder blocks (`class="slot"`). Replace a block and drop its
-  `slot` class when the content lands. Adding a section needs only a nav link
-  and a matching `id`; the scroll spy reads the nav.
+Deep links for sharing and screenshots: `?theme=light|dark`, `?forge=N` (opens
+the walkthrough at step N), `?lens=text&table=1` (results lens and open table),
+`?case=N`.
+
+## What is still parked
+
+- **Byline and news.** `section.byline` and `#news` carry the `empty` class,
+  which hides them; remove it and fill them when the paper is on arXiv.
 - **Links.** Release links are parked: `class="btn pending"` in the hero and
   `class="card feature pending-card"` under Resources, with no `href`. For each,
   drop the class and add the `href`. `data-link` names the artifact.
-- **Other TODOs.** Search `TODO` for the lede, contribution bullets, byline,
-  news, BibTeX, the GitHub nav button, the page description and the social card.
+- **Other TODOs.** Search `TODO` for the BibTeX entry, the GitHub nav button and
+  the social card. The "More research" menu is commented out in the nav.
 
 ## Hero cover
 
@@ -58,9 +74,10 @@ Renders come from the paper tree or from `tools/cover_src/`. The paper tree
 holds the gold renders of benchmark samples (`case_studies/`) and the Figure-1
 thumbnails with their sources (`overview_src/thumbs/`), including the dashboard,
 the 3D surface and the Manim transformer, which Figure 1 shares with the cover;
-edit those there. `tools/cover_src/` holds the cover-only sources: the board page
-(`kanban.html`) and the rose chart (`make_rose.py` -> `rose.svg`). Band colours
-follow the figure. The layers drift
+edit those there. The board page is shared too (`thumbs/kanban_after.html`);
+`render.sh` renders it at the cover's size. `tools/cover_src/` keeps only the
+cover-only rose chart (`make_rose.py` -> `rose.svg`). Band colours follow the
+figure. The layers drift
 against the pointer (off under reduced motion and on touch screens), and on
 load the artifacts leave the prism once.
 
