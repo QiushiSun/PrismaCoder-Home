@@ -61,9 +61,11 @@
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Rhythm */
-  --page: 1560px;        /* content sections */
-  --page-wide: 1700px;   /* leaderboard, widest tables */
-  --page-hero: 1500px;   /* hero + byline */
+  /* Content sits in the middle ~80% of the screen: 10% margin a side on common
+     laptop and desktop widths, capped so a very wide screen does not stretch it. */
+  --page: min(80vw, 1360px);       /* content sections */
+  --page-wide: min(82vw, 1440px);  /* results tables, hero, byline */
+  --page-hero: min(82vw, 1440px);
   --r-sm: 8px;
   --r: 12px;
   --r-lg: 18px;
@@ -237,6 +239,7 @@ code, kbd {
    5. Layout
    -------------------------------------------------------------------------- */
 .wrap { width: 100%; max-width: var(--page); margin: 0 auto; padding: 0 26px; }
+@media (max-width: 900px) { :root { --page: 100%; --page-wide: 100%; --page-hero: 100%; } }
 .wrap-wide { max-width: var(--page-wide); }
 
 section { position: relative; }
